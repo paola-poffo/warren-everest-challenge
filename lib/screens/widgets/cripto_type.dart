@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:warren_everest_challenge/use_cases/model/cripto_model.dart';
 
-import '../../shared/providers/providers.dart';
+import '../../shared/template/providers.dart';
+import 'arrow_button.dart';
 
 class CriptoType extends StatefulHookConsumerWidget {
-  final String name;
-  final String abbreviation;
-  final double value;
-  final double done;
-  final String image;
+  final CriptoModel criptoModel;
 
-  const CriptoType({
-    Key? key,
-    required this.name,
-    required this.abbreviation,
-    required this.value,
-    required this.done,
-    required this.image,
-  }) : super(key: key);
-
+  const CriptoType({required this.criptoModel, Key? key}) : super(key: key);
   @override
   ConsumerState<CriptoType> createState() => _CriptoTypeState();
 }
@@ -28,6 +18,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
   @override
   Widget build(BuildContext context) {
     final visible = ref.watch(visibilityProvider.state);
+    CriptoModel criptoModel = widget.criptoModel;
 
     return Column(
       children: [
@@ -42,14 +33,14 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                 children: [
                   CircleAvatar(
                     radius: 26,
-                    backgroundImage: AssetImage(widget.image),
+                    backgroundImage: AssetImage(criptoModel.image),
                   ),
                   const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.abbreviation,
+                        criptoModel.abbreviation,
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 19,
@@ -57,7 +48,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        widget.name,
+                        criptoModel.name,
                         style: const TextStyle(
                           color: Color.fromRGBO(117, 118, 128, 1),
                           fontSize: 15,
@@ -75,14 +66,14 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                           children: [
                             Text(
                               NumberFormat.simpleCurrency(locale: 'pt-BR')
-                                  .format(widget.value),
+                                  .format(criptoModel.value),
                               style: const TextStyle(fontSize: 20),
                             ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
                                 Text(
-                                  widget.done.toString(),
+                                  criptoModel.done.toString(),
                                   style: const TextStyle(
                                     color: Color.fromRGBO(117, 118, 128, 1),
                                     fontSize: 15,
@@ -90,7 +81,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  widget.abbreviation,
+                                  criptoModel.abbreviation,
                                   style: const TextStyle(
                                     color: Color.fromRGBO(117, 118, 128, 1),
                                     fontSize: 15,
@@ -122,16 +113,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                             ),
                           ],
                         ),
-                  Column(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_forward_ios_rounded),
-                        onPressed: () {},
-                        color: const Color.fromRGBO(117, 118, 128, 1),
-                        iconSize: 18,
-                      ),
-                    ],
-                  ),
+                  const ArrowButton(),
                 ],
               ),
             ],

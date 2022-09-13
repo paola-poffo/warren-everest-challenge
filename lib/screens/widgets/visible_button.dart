@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../shared/providers/providers.dart';
+import '../../shared/template/providers.dart';
 
 class VisibleButton extends StatefulHookConsumerWidget {
   const VisibleButton({Key? key}) : super(key: key);

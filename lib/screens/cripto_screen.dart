@@ -2,15 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../use_cases/model/cripto_model.dart';
 import 'widgets/visible_button.dart';
 import '../shared/widgets/bottom_navigation.dart';
-import '../shared/providers/providers.dart';
+import '../shared/template/providers.dart';
 import '../core/asset.dart';
 import 'widgets/cripto_type.dart';
 
 class CriptoScreen extends StatefulHookConsumerWidget {
-  const CriptoScreen({Key? key}) : super(key: key);
-
+  CriptoScreen({Key? key}) : super(key: key);
+  final List<CriptoModel> criptoModelList = [
+    CriptoModel(
+      name: 'Bitcoin',
+      abbreviation: 'BTC',
+      value: 6557.00,
+      done: 0.65,
+      image: btc,
+    ),
+    CriptoModel(
+      name: 'Ethereum',
+      abbreviation: 'ETH',
+      value: 7996.00,
+      done: 0.94,
+      image: eth,
+    ),
+    CriptoModel(
+      name: 'Litecoin',
+      abbreviation: 'LTC',
+      value: 245.00,
+      done: 0.82,
+      image: ltc,
+    ),
+  ];
   @override
   ConsumerState<CriptoScreen> createState() => _CriptoScreenState();
 }
@@ -74,38 +97,18 @@ class _CriptoScreenState extends ConsumerState<CriptoScreen> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: const [
-                  CriptoType(
-                    name: 'Bitcoin',
-                    abbreviation: 'BTC',
-                    value: 6557.00,
-                    done: 0.65,
-                    image: btc,
-                  ),
-                  CriptoType(
-                    name: 'Ethereum',
-                    abbreviation: 'ETH',
-                    value: 7996.00,
-                    done: 0.94,
-                    image: eth,
-                  ),
-                  CriptoType(
-                    name: 'Litecoin',
-                    abbreviation: 'LTC',
-                    value: 245.00,
-                    done: 0.82,
-                    image: ltc,
-                  ),
-                ],
-              ),
+              child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return CriptoType(
+                      criptoModel: widget.criptoModelList[index],
+                    );
+                  },
+                  itemCount: widget.criptoModelList.length),
             ),
           ],
         ),
         bottomNavigationBar: const BottomNavigation(),
       ),
     );
-
-
   }
 }
