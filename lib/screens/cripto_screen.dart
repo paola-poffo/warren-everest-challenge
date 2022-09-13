@@ -34,6 +34,8 @@ class CriptoScreen extends StatefulHookConsumerWidget {
       image: ltc,
     ),
   ];
+  static String route = '/';
+  
   @override
   ConsumerState<CriptoScreen> createState() => _CriptoScreenState();
 }
