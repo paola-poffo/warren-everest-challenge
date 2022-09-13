@@ -1,8 +1,10 @@
+import 'package:decimal/decimal.dart';
+
 class CriptoModel {
   final String name;
   final String abbreviation;
-  final double value;
-  final double done;
+  final Decimal value;
+  final Decimal done;
   final String image;
 
   CriptoModel({

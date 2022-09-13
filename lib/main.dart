@@ -12,7 +12,7 @@ void main() {
         routes: routesDestination,
         title: 'Warren Everest Challenge',
         debugShowCheckedModeBanner: false,
-        home: CriptoScreen(),
+        home: const CriptoScreen(),
       ),
     ),
   );

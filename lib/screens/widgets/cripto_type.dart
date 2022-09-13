@@ -3,13 +3,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:warren_everest_challenge/use_cases/model/cripto_model.dart';
 
-import '../../shared/template/providers.dart';
-import 'arrow_button.dart';
+import '../../shared/template/visibility_provider.dart';
 
 class CriptoType extends StatefulHookConsumerWidget {
   final CriptoModel criptoModel;
 
   const CriptoType({required this.criptoModel, Key? key}) : super(key: key);
+
   @override
   ConsumerState<CriptoType> createState() => _CriptoTypeState();
 }
@@ -66,7 +66,11 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                           children: [
                             Text(
                               NumberFormat.simpleCurrency(locale: 'pt-BR')
-                                  .format(criptoModel.value),
+                                  .format(
+                                double.parse(
+                                  criptoModel.value.toString(),
+                                ),
+                              ),
                               style: const TextStyle(fontSize: 20),
                             ),
                             const SizedBox(height: 8),
@@ -113,7 +117,12 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                             ),
                           ],
                         ),
-                  const ArrowButton(),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios_rounded),
+                    onPressed: () {},
+                    color: const Color.fromRGBO(117, 118, 128, 1),
+                    iconSize: 18,
+                  ),
                 ],
               ),
             ],
