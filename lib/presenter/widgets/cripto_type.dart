@@ -27,7 +27,7 @@ class CriptoType extends StatefulHookConsumerWidget {
 class _CriptoTypeState extends ConsumerState<CriptoType> {
   @override
   Widget build(BuildContext context) {
-    var visible = ref.watch(visibilityProvider.state);
+    final visible = ref.watch(visibilityProvider.state);
 
     return Container(
       margin: const EdgeInsets.only(top: 8, bottom: 8),
