@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
+
 import '../../core/asset.dart';
+
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -9,32 +12,32 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _selectedIndex = 0;
+  int navIndex = 0;
+  late PageController changeController = PageController(initialPage: 0);
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage(warren),
-            ),
-            label: 'Portifólio'),
-        BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage(movements),
-            ),
-            label: 'Movimentações'),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: const Color.fromRGBO(224, 43, 87, 1),
-      onTap: _onItemTapped,
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage(warren),
+              ),
+              label: 'Portifólio'),
+          BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage(movements),
+              ),
+              label: 'Movimentações'),
+        ],
+        selectedItemColor: const Color.fromRGBO(224, 43, 87, 1),
+        currentIndex: navIndex,
+        onTap: onTap,
+        },
+      ),
     );
   }
 }
