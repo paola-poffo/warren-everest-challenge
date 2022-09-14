@@ -2,7 +2,7 @@ import 'package:decimal/decimal.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/asset.dart';
-import '../../use_cases/model/cripto_model.dart';
+import '../use_cases/model/cripto_model.dart';
 
 final criptoProvider = Provider(
   (ref) => [

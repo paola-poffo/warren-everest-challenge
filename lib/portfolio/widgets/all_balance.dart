@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:warren_everest_challenge/screens/widgets/visible_button.dart';
+import 'package:warren_everest_challenge/portfolio/widgets/visible_button.dart';
 
-import '../../shared/template/visibility_provider.dart';
+import '../providers/visibility_provider.dart';
 
 class AllBalance extends StatefulHookConsumerWidget {
   const AllBalance({super.key});

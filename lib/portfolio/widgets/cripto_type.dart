@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:warren_everest_challenge/use_cases/model/cripto_model.dart';
+import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model.dart';
 
-import '../../shared/template/visibility_provider.dart';
+import '../providers/visibility_provider.dart';
 
 class CriptoType extends StatefulHookConsumerWidget {
   final CriptoModel criptoModel;
