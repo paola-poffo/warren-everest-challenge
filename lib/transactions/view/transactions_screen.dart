@@ -4,8 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class TransactionsScreen extends StatefulHookConsumerWidget {
   const TransactionsScreen({Key? key}) : super(key: key);
 
-  static String route = '/transactions';
-
   @override
   ConsumerState<TransactionsScreen> createState() => _TransactionsScreenState();
 }
