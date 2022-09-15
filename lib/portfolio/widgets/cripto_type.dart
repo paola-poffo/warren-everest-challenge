@@ -121,10 +121,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DetailsScreen()));
+                    Navigator.pushNamed(context, '/details');
                     },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,
