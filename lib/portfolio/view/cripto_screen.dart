@@ -7,8 +7,6 @@ import '../../shared/provider/cripto_provider.dart';
 class CriptoScreen extends StatefulHookConsumerWidget {
   const CriptoScreen({Key? key}) : super(key: key);
 
-   static String route = '/cripto';
-
   @override
   ConsumerState<CriptoScreen> createState() => _CriptoScreenState();
 }

@@ -13,13 +13,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int navIndex = 0;
-  late PageController changeController = PageController(initialPage: 0);
-
-  @override
-  void dispose() {
-    changeController.dispose();
-    super.dispose();
-  }
+  final changeController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
