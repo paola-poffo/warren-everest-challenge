@@ -17,7 +17,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
         appBar: AppBar(
           title: const Text('Movimentações'),
         ),
-        body: const Text('Teste'),
+        body: const Text(''),
       ),
     );
   }
