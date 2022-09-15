@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:warren_everest_challenge/portfolio/widgets/cripto_type.dart';
+import 'cripto_type.dart';
 
 import '../../shared/use_cases/model/cripto_model.dart';
 

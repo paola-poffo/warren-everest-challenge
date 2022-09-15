@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model.dart';
+import 'package:warren_everest_challenge/details/view/details.dart';
+import '../../shared/use_cases/model/cripto_model.dart';
 
 import '../providers/visibility_provider.dart';
 
@@ -119,7 +120,12 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                         ),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DetailsScreen()));
+                    },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,
                   ),
