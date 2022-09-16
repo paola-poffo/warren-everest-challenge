@@ -7,7 +7,7 @@ class Graphic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: 2.2,
       child: LineChart(
         LineChartData(
           lineBarsData: [
@@ -15,7 +15,12 @@ class Graphic extends StatelessWidget {
               barWidth: 3.5,
               color: const Color.fromRGBO(224, 43, 87, 1),
               dotData: FlDotData(show: false),
-              spots: [],
+              spots: const [
+                FlSpot(0, 3),
+                FlSpot(3, 7),
+                FlSpot(7, 1),
+                FlSpot(8, 3),
+              ],
             ),
           ],
           betweenBarsData: [],
@@ -28,8 +33,8 @@ class Graphic extends StatelessWidget {
           borderData: FlBorderData(
             border: const Border(
               bottom: BorderSide(
-                width: 3,
-                color: Color.fromRGBO(227, 228, 235, 1),
+                width: 2,
+                color: Color.fromARGB(156, 180, 181, 193),
               ),
             ),
           ),
@@ -40,7 +45,6 @@ class Graphic extends StatelessWidget {
           maxY: 15,
           baselineY: 3,
           clipData: FlClipData.none(),
-          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         ),
       ),
     );

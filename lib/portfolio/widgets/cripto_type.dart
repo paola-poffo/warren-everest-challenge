@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:warren_everest_challenge/details/view/details_screen.dart';
 import '../../shared/use_cases/model/cripto_model.dart';
 
 import '../providers/visibility_provider.dart';
