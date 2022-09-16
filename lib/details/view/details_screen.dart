@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:warren_everest_challenge/details/widgets/default_appbar.dart';
+
+import '../widgets/body_details.dart';
 
 class DetailsScreen extends StatefulHookConsumerWidget {
   static const route = '/details';
@@ -13,22 +15,11 @@ class DetailsScreen extends StatefulHookConsumerWidget {
 class _DetailsScreenState extends ConsumerState<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shadowColor: Colors.white,
-        elevation: 1,
-        title: const Text(
-          'Detalhes',
-          style: TextStyle(
-            fontSize: 21,
-            color: Colors.black,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
+    return const SafeArea(
+      child: Scaffold(
+        appBar: DefaultAppbar(),
+        body: BodyDetails(),
       ),
-      body: Container(),
     );
   }
 }
