@@ -68,7 +68,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                               NumberFormat.simpleCurrency(locale: 'pt-BR')
                                   .format(
                                 double.parse(
-                                  criptoModel.value.toString(),
+                                  criptoModel.amount.toString(),
                                 ),
                               ),
                               style: const TextStyle(fontSize: 20),

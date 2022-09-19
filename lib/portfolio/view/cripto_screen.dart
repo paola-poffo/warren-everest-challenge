@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../shared/widgets/bottom_navigation.dart';
 import '../widgets/all_balance.dart';
 import '../widgets/cripto_list.dart';
-import '../../shared/provider/cripto_provider.dart';
+import '../../shared/provider/cripto_list_provider.dart';
 
 class CriptoScreen extends StatefulHookConsumerWidget {
   const CriptoScreen({Key? key}) : super(key: key);
