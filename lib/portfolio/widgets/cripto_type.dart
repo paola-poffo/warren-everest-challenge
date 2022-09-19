@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+import '../../shared/utils/arguments.dart';
 import '../../shared/use_cases/model/cripto_model.dart';
 
+import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 
-class CriptoType extends StatefulHookConsumerWidget {
+class CriptoType extends HookConsumerWidget {
   final CriptoModel criptoModel;
 
   const CriptoType({required this.criptoModel, Key? key}) : super(key: key);
 
-  @override
-  ConsumerState<CriptoType> createState() => _CriptoTypeState();
-}
+  double allPriceChange() {
+    return (criptoModel.allPrices.first.toDouble() /
+                criptoModel.allPrices[1].toDouble() -
+            1) *
+        100;
+  }
 
-class _CriptoTypeState extends ConsumerState<CriptoType> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final visible = ref.watch(visibilityProvider.state);
-    CriptoModel criptoModel = widget.criptoModel;
 
     return Column(
       children: [
@@ -65,12 +67,7 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              NumberFormat.simpleCurrency(locale: 'pt-BR')
-                                  .format(
-                                double.parse(
-                                  criptoModel.amount.toString(),
-                                ),
-                              ),
+                              FormatCurrency.format(criptoModel.amount),
                               style: const TextStyle(fontSize: 20),
                             ),
                             const SizedBox(height: 8),
@@ -120,7 +117,9 @@ class _CriptoTypeState extends ConsumerState<CriptoType> {
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: () {
-                    Navigator.pushNamed(context, '/details');
+                      criptoModel.variation = allPriceChange();
+                      Navigator.pushNamed(context, '/details',
+                          arguments: Arguments(criptoModel: criptoModel));
                     },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,

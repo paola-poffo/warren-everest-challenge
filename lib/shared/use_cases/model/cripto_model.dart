@@ -11,7 +11,7 @@ class CriptoModel {
   Decimal done;
   Decimal currentPrice;
   List<Decimal> singlePrice;
-  List<Decimal> allPrice;
+  List<Decimal> allPrices;
 
   CriptoModel({
     required this.serialId,
@@ -23,6 +23,6 @@ class CriptoModel {
     required this.done,
     required this.currentPrice,
     required this.singlePrice,
-    required this.allPrice,
+    required this.allPrices,
   });
 }

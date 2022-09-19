@@ -1,6 +1,19 @@
+import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 
-final currencyFormatter  = NumberFormat.currency(
-  locale: "pt_BR",
-  symbol: "R\$",
-);
+class FormatCurrency {
+  static String format(Decimal price) {
+    return NumberFormat.simpleCurrency(locale: 'pt-BR')
+        .format(price.toDouble());
+  }
+
+  static String doubleFormat(double price) {
+    return NumberFormat.simpleCurrency(locale: 'pt-BR').format(price);
+  }
+}
+
+class DecimalFormatter {
+  static double decimalFormatter(Decimal number) {
+    return double.parse(number.toString());
+  }
+}
