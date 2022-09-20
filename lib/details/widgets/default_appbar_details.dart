@@ -6,13 +6,13 @@ class DefaultAppbarDetails extends StatefulHookConsumerWidget
   const DefaultAppbarDetails( {Key? key}) : super(key: key);
 
   @override
-  ConsumerState<DefaultAppbarDetails> createState() => _DefaultAppbarState();
+  ConsumerState<DefaultAppbarDetails> createState() => _DefaultAppbarDetailsState();
 
   @override
   Size get preferredSize => const Size(double.maxFinite, 50);
 }
 
-class _DefaultAppbarState extends ConsumerState<DefaultAppbarDetails> {
+class _DefaultAppbarDetailsState extends ConsumerState<DefaultAppbarDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

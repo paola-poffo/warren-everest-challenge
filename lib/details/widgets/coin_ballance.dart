@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../shared/utils/currency_formatter.dart';
 import '../../shared/provider/cripto_provider.dart';
+import '../../shared/utils/currency_formatter.dart';
 
 class CoinBallance extends HookConsumerWidget {
   const CoinBallance({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var onlyoneCripto = ref.watch(criptoProvider.notifier).state;
+    var cripto = ref.watch(criptoProvider.notifier).state;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,7 +18,7 @@ class CoinBallance extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              onlyoneCripto.name,
+              cripto.name,
               style: const TextStyle(
                 fontSize: 34,
                 fontWeight: FontWeight.w700,
@@ -26,12 +26,12 @@ class CoinBallance extends HookConsumerWidget {
             ),
             CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage(onlyoneCripto.image),
+              backgroundImage: AssetImage(cripto.image),
             ),
           ],
         ),
         Text(
-          onlyoneCripto.abbreviation,
+          cripto.abbreviation,
           style: const TextStyle(
             color: Color.fromRGBO(117, 118, 128, 1),
             fontSize: 17,
@@ -39,7 +39,7 @@ class CoinBallance extends HookConsumerWidget {
         ),
         const SizedBox(height: 15),
         Text(
-          FormatCurrency.format(onlyoneCripto.allPrices.first),
+          FormatCurrency.format(cripto.allPrices.first),
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 32,

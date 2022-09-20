@@ -34,16 +34,10 @@ class _ButtonDayState extends ConsumerState<ButtonDay> {
           () {
             days.state = widget.daysButton;
             getButtonColor();
-            ref
-                .read(criptoProvider.notifier)
-                .getchangeVariation(widget.daysButton);
-            ref
-                .read(currentPriceProvider.notifier)
-                .getCurrentPrice(widget.daysButton, oneCripto);
-            oneCripto.currentPrice  =
-                ref.read(currentPriceProvider.notifier).state;
-            oneCripto.variation =
-                ref.read(criptoProvider.notifier).state.variation;
+            ref.read(criptoProvider.notifier).getchangeVariation(widget.daysButton);
+            ref.read(currentPriceProvider.notifier).getCurrentPrice(widget.daysButton, oneCripto);
+            oneCripto.currentPrice = ref.read(currentPriceProvider.notifier).state;
+            oneCripto.variation = ref.read(criptoProvider.notifier).state.variation;
           },
         );
       },

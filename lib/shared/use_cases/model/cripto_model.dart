@@ -10,7 +10,6 @@ class CriptoModel {
   Decimal amount;
   Decimal done;
   Decimal currentPrice;
-  List<Decimal> singlePrice;
   List<Decimal> allPrices;
 
   CriptoModel({
@@ -22,7 +21,6 @@ class CriptoModel {
     required this.amount,
     required this.done,
     required this.currentPrice,
-    required this.singlePrice,
     required this.allPrices,
   });
 }

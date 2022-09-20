@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/details/widgets/default_appbar_details.dart';
+import '../widgets/default_appbar_details.dart';
 
 import '../../shared/use_cases/model/cripto_model.dart';
 import '../../shared/utils/arguments.dart';

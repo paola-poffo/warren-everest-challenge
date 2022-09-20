@@ -20,7 +20,6 @@ class CriptoNotifier extends StateNotifier<CriptoModel> {
             amount: Decimal.parse('1'),
             done: Decimal.parse('1'),
             currentPrice: Decimal.parse('1'),
-            singlePrice: [Decimal.parse('0')],
             allPrices: [Decimal.parse('0')],
           ),
         );

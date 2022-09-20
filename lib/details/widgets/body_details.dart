@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/details/widgets/variation_detail.dart';
+import 'variation_detail.dart';
 import '../../shared/provider/day_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../../shared/provider/cripto_provider.dart';
@@ -54,10 +54,9 @@ class BodyDetails extends HookConsumerWidget {
             ),
             Column(
               children: [
-                const Divider(),
+                const Divider(thickness: 2),
                 VariationDetail(
-                  title:
-                      'Preço atual',
+                  title: 'Preço atual',
                   number: FormatCurrency.format(criptoModel.currentPrice),
                 ),
                 const Divider(thickness: 1),
@@ -66,7 +65,6 @@ class BodyDetails extends HookConsumerWidget {
                   number:
                       '${criptoModel.variation > 0 ? '+' : ''}${criptoModel.variation.toStringAsFixed(2)}%',
                   color: criptoModel.variation > 0 ? Colors.green : Colors.red,
-                  isVariation: true,
                 ),
                 const Divider(thickness: 1),
                 VariationDetail(

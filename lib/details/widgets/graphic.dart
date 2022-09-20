@@ -2,10 +2,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../shared/provider/cripto_provider.dart';
 import '../../shared/provider/day_provider.dart';
 import '../../shared/use_cases/model/cripto_model.dart';
 import '../../shared/utils/currency_formatter.dart';
-import '../../shared/provider/cripto_provider.dart';
 
 class Graphic extends StatefulHookConsumerWidget {
   const Graphic({Key? key}) : super(key: key);

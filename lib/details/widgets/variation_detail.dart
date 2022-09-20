@@ -4,14 +4,12 @@ class VariationDetail extends StatelessWidget {
   final String title;
   final dynamic number;
   final Color? color;
-  final bool isVariation;
 
   const VariationDetail({
     Key? key,
     required this.title,
     required this.number,
     this.color = Colors.black,
-    this.isVariation = false,
   }) : super(key: key);
 
   @override
@@ -33,7 +31,6 @@ class VariationDetail extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               color: color,
-              fontWeight: isVariation ? FontWeight.bold : FontWeight.normal,
             ),
           ),
         ],
