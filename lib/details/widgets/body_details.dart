@@ -14,8 +14,8 @@ class BodyDetails extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var criptoModel = ref.watch(criptoProvider.notifier).state;
-    var days = ref.watch(dayProvider);
+    final criptoModel = ref.watch(criptoProvider.notifier).state;
+    final days = ref.watch(dayProvider);
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),

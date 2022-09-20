@@ -15,13 +15,32 @@ class Graphic extends StatefulHookConsumerWidget {
 }
 
 class _GraphicState extends ConsumerState<Graphic> {
-  late int days;
-  late CriptoModel criptoModel;
-
   @override
   Widget build(BuildContext context) {
-    criptoModel = ref.watch(criptoProvider.notifier).state;
-    days = ref.watch(dayProvider.state).state;
+    final CriptoModel criptoModel = ref.watch(criptoProvider.notifier).state;
+    final int days = ref.watch(dayProvider.state).state;
+
+    List<FlSpot> generateFlSpot() {
+      List<FlSpot> listDays = [];
+      if (days != 1) {
+        for (int day = 0; day < days; day++) {
+          listDays.add(
+            FlSpot(
+              day.toDouble(),
+              criptoModel.allPrices[day].toDouble(),
+            ),
+          );
+        }
+        return listDays;
+      } else {
+        for (int day = 0; day < criptoModel.allPrices.length; day++) {
+          listDays.add(
+            FlSpot(day.toDouble(), criptoModel.allPrices[day].toDouble()),
+          );
+        }
+        return listDays;
+      }
+    }
 
     return Padding(
       padding: const EdgeInsets.only(top: 30),
@@ -82,27 +101,5 @@ class _GraphicState extends ConsumerState<Graphic> {
         ),
       ),
     );
-  }
-
-  List<FlSpot> generateFlSpot() {
-    List<FlSpot> listDays = [];
-    if (days != 1) {
-      for (int day = 0; day < days; day++) {
-        listDays.add(
-          FlSpot(
-            day.toDouble(),
-            criptoModel.allPrices[day].toDouble(),
-          ),
-        );
-      }
-      return listDays;
-    } else {
-      for (int day = 0; day < criptoModel.allPrices.length; day++) {
-        listDays.add(
-          FlSpot(day.toDouble(), criptoModel.allPrices[day].toDouble()),
-        );
-      }
-      return listDays;
-    }
   }
 }
