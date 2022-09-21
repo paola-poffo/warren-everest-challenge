@@ -1,9 +1,9 @@
-import '../use_cases/model/cripto_model.dart';
+// import '../use_cases/model/cripto_model.dart';
 
-class Arguments {
-  CriptoModel criptoModel;
+// class Arguments {
+//   CriptoModel criptoModel;
 
-  Arguments({
-    required this.criptoModel,
-  });
-}
+//   Arguments({
+//     required this.criptoModel,
+//   });
+// }

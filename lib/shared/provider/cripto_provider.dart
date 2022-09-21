@@ -1,46 +1,21 @@
-import 'package:decimal/decimal.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../use_cases/model/cripto_model.dart';
-import '../utils/currency_formatter.dart';
+import '../use_cases/model/cripto_model_api.dart';
 
-var criptoProvider = StateNotifierProvider<CriptoNotifier, CriptoModel>(
+var criptoProviderApi = StateNotifierProvider<CriptoNotifier, CriptoModelApi>(
   (ref) => CriptoNotifier(),
 );
 
-class CriptoNotifier extends StateNotifier<CriptoModel> {
+class CriptoNotifier extends StateNotifier<CriptoModelApi> {
   CriptoNotifier()
       : super(
-          CriptoModel(
-            serialId: 0,
-            image: '',
+          CriptoModelApi(
+            id: '',
             name: '',
-            abbreviation: '',
-            variation: 0,
-            amount: Decimal.parse('1'),
-            done: Decimal.parse('1'),
-            currentPrice: Decimal.parse('1'),
-            allPrices: [Decimal.parse('0')],
+            currentPrice: 0,
+            image: '',
+            symbol: '',
+            priceChange: 0,
           ),
         );
-  void getchangeVariation(int time) {
-    time = time == 1 ? 2 : time;
-    state
-        .variation = (DecimalFormatter.decimalFormatter(state.allPrices.first) /
-                DecimalFormatter.decimalFormatter(state.allPrices[time - 1]) -
-            1) *
-        100;
-  }
-}
-
-var currentPriceProvider = StateNotifierProvider<CurrentPriceNotifier, Decimal>(
-  (ref) => CurrentPriceNotifier(),
-);
-
-class CurrentPriceNotifier extends StateNotifier<Decimal> {
-  CurrentPriceNotifier() : super(Decimal.parse('0'));
-
-  void getCurrentPrice(int days, CriptoModel cripto) {
-    state = (cripto.allPrices[days - 1]);
-  }
 }

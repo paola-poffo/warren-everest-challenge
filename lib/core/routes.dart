@@ -9,6 +9,6 @@ import '../transactions/view/transactions_screen.dart';
 var routesNavigation = {
   CriptoScreen.route: (context) => const CriptoScreen(),
   TransactionsScreen.route: (context) => const TransactionsScreen(),
-  DetailsScreen.route: (context) =>  const DetailsScreen(),
+  //DetailsScreen.route: (context) =>  const DetailsScreen(),
   ConversionScreen.route: (context) =>  const ConversionScreen(),
 };

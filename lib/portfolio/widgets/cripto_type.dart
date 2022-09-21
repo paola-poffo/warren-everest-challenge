@@ -1,26 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../shared/utils/arguments.dart';
-import '../../shared/use_cases/model/cripto_model.dart';
+import 'package:warren_everest_challenge/details/repository/details_repository.dart';
+import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model_api.dart';
 
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 
 class CriptoType extends HookConsumerWidget {
-  final CriptoModel criptoModel;
+  final CriptoModelApi criptoModelApi;
 
-  const CriptoType({required this.criptoModel, Key? key}) : super(key: key);
+  CriptoType({required this.criptoModelApi, Key? key}) : super(key: key);
 
-  double allPriceChange() {
-    return (criptoModel.allPrices.first.toDouble() /
-                criptoModel.allPrices[1].toDouble() -
-            1) *
-        100;
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final visible = ref.watch(visibilityProvider.state);
+    criptoModelApi.symbol = criptoModelApi.symbol.toUpperCase();
 
     return Column(
       children: [
@@ -35,14 +31,14 @@ class CriptoType extends HookConsumerWidget {
                 children: [
                   CircleAvatar(
                     radius: 26,
-                    backgroundImage: AssetImage(criptoModel.image),
+                    backgroundImage: AssetImage(criptoModelApi.image),
                   ),
                   const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        criptoModel.abbreviation,
+                        criptoModelApi.symbol,
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 19,
@@ -50,7 +46,7 @@ class CriptoType extends HookConsumerWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        criptoModel.name,
+                        criptoModelApi.name,
                         style: const TextStyle(
                           color: Color.fromRGBO(117, 118, 128, 1),
                           fontSize: 15,
@@ -67,22 +63,15 @@ class CriptoType extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              FormatCurrency.format(criptoModel.amount),
+                              FormatCurrency.doubleFormat(
+                                  criptoModelApi.currentPrice),
                               style: const TextStyle(fontSize: 20),
                             ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
                                 Text(
-                                  criptoModel.done.toString(),
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(117, 118, 128, 1),
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  criptoModel.abbreviation,
+                                  criptoModelApi.symbol.toString(),
                                   style: const TextStyle(
                                     color: Color.fromRGBO(117, 118, 128, 1),
                                     fontSize: 15,
@@ -117,9 +106,8 @@ class CriptoType extends HookConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: () {
-                      criptoModel.variation = allPriceChange();
                       Navigator.pushNamed(context, '/details',
-                          arguments: Arguments(criptoModel: criptoModel));
+                          arguments: criptoModelApi);
                     },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,

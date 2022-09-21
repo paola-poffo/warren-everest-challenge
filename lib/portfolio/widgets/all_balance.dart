@@ -1,9 +1,8 @@
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:warren_everest_challenge/portfolio/providers/balance_provider_api.dart';
 
-import '../../shared/provider/cripto_list_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 import 'visible_button.dart';
@@ -18,7 +17,7 @@ class AllBalance extends StatefulHookConsumerWidget {
 class _AllBalanceState extends ConsumerState<AllBalance> {
   @override
   Widget build(BuildContext context) {
-    var criptosList = ref.read(criptoListProvider);
+    var ballance = ref.watch(ballanceProviderApi.notifier).state;
     var stateVisible = ref.watch(visibilityProvider.state);
 
     return Container(
@@ -43,7 +42,7 @@ class _AllBalanceState extends ConsumerState<AllBalance> {
           ),
           stateVisible.state
               ? Text(
-                  FormatCurrency.format(ballance()),
+                  FormatCurrency.doubleFormat(ballance),
                   style: GoogleFonts.montserrat(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,
