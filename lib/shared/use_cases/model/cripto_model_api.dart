@@ -1,4 +1,4 @@
-class CriptoModels {
+class CriptoModelApi {
   String id;
   String symbol;
   String name;
@@ -26,7 +26,7 @@ class CriptoModels {
   Null roi;
   String lastUpdated;
 
-  CriptoModels(
+  CriptoModelApi(
       {required this.id,
       required this.symbol,
       required this.name,
@@ -54,8 +54,8 @@ class CriptoModels {
       required this.roi,
       required this.lastUpdated});
 
-  factory CriptoModels.fromMap(Map<String, dynamic> map) {
-    return CriptoModels(
+  factory CriptoModelApi.fromMap(Map<String, dynamic> map) {
+    return CriptoModelApi(
       id: map['id'],
       symbol: map['symbol'],
       name: map['name'],

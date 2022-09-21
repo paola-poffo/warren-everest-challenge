@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/shared/use_cases/model/cripto_models.dart';
+import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model_api.dart';
 import '../../shared/provider/cripto_list_provider.dart';
 import '../../shared/repository/cripto_repository.dart';
 import 'cripto_type.dart';
@@ -17,7 +17,7 @@ class CriptoList extends StatefulHookConsumerWidget {
 
 class _CriptoListState extends ConsumerState<CriptoList> {
   CriptoRepository repository = CriptoRepository(Dio());
-  late Future<List<CriptoModels>> criptos;
+  late Future<List<CriptoModelApi>> criptos;
 
   @override
   void initState() {
