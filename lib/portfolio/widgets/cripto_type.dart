@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/details/repository/details_repository.dart';
 import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model_api.dart';
 
 import '../../shared/utils/currency_formatter.dart';
@@ -12,11 +10,9 @@ class CriptoType extends HookConsumerWidget {
 
   CriptoType({required this.criptoModelApi, Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final visible = ref.watch(visibilityProvider.state);
-    criptoModelApi.symbol = criptoModelApi.symbol.toUpperCase();
 
     return Column(
       children: [
@@ -31,14 +27,15 @@ class CriptoType extends HookConsumerWidget {
                 children: [
                   CircleAvatar(
                     radius: 26,
-                    backgroundImage: AssetImage(criptoModelApi.image),
+                    backgroundImage: NetworkImage(criptoModelApi.image),
+                    backgroundColor: Colors.transparent,
                   ),
                   const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        criptoModelApi.symbol,
+                        criptoModelApi.symbol.toUpperCase(),
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 19,
@@ -71,7 +68,7 @@ class CriptoType extends HookConsumerWidget {
                             Row(
                               children: [
                                 Text(
-                                  criptoModelApi.symbol.toString(),
+                                  criptoModelApi.symbol.toUpperCase(),
                                   style: const TextStyle(
                                     color: Color.fromRGBO(117, 118, 128, 1),
                                     fontSize: 15,
