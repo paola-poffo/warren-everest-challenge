@@ -13,12 +13,12 @@ class BodyCriptos extends HookConsumerWidget {
     final criptos = ref.watch(criptosProvider);
 
     return criptos.when(
-      data: (data) {
+      data: (criptoViewData) {
         return Column(
           children: [
             const CriptoBalance(),
             CriptoList(
-              criptosViewData: data,
+              criptosViewData: criptoViewData,
             ),
           ],
         );
