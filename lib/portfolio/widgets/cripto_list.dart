@@ -1,49 +1,37 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model_api.dart';
-import '../../shared/repository/cripto_repository.dart';
+import '../model/criptos_view_data.dart';
+import '../providers/amount_provider.dart';
 import 'cripto_type.dart';
 
-class CriptoList extends StatefulHookConsumerWidget {
-  const CriptoList({Key? key}) : super(key: key);
+class CriptoList extends HookConsumerWidget {
+  const CriptoList({Key? key, required this.criptosViewData}) : super(key: key);
 
-  @override
-  ConsumerState<CriptoList> createState() => _CriptoListState();
-}
+  final List<CriptosViewData> criptosViewData;
 
-class _CriptoListState extends ConsumerState<CriptoList> {
-  CriptoRepository repository = CriptoRepository(Dio());
-  late Future<List<CriptoModelApi>> criptos;
-
-  @override
-  void initState() {
-    criptos = repository.getAllCoins();
-    super.initState();
+  double getBalance(List<CriptosViewData> criptos) {
+    double amount = 0;
+    for (CriptosViewData cripto in criptos) {
+      amount += cripto.currentPrice;
+    }
+    return amount;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Future.delayed(
+      Duration.zero,
+      () {
+        ref.read(amountProvider.state).state = getBalance(criptosViewData);
+      },
+    );
     return Expanded(
-      child: FutureBuilder(
-        future: criptos,
-        builder: (context, AsyncSnapshot<List<CriptoModelApi>> snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                CriptoModelApi cripto = snapshot.data![index];
-                return CriptoType(
-                  criptoModelApi: cripto,
-                );
-              },
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Color.fromRGBO(224, 43, 87, 1),
-            ),
-          );
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: criptosViewData.length,
+        itemBuilder: (context, index) {
+          CriptosViewData cripto = criptosViewData[index];
+          return CriptoType(criptosViewData: cripto);
         },
       ),
     );

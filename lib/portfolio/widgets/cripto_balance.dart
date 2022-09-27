@@ -1,30 +1,24 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:warren_everest_challenge/portfolio/providers/balance_provider_api.dart';
-
-import '../../shared/use_cases/model/cripto_model_api.dart';
+import '../providers/amount_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 import 'visible_button.dart';
 
-class AllBalance extends StatefulHookConsumerWidget {
-   final CriptoModelApi criptoModelApi;
-  const AllBalance({
-    required this.criptoModelApi,
-  });
+class CriptoBalance extends StatefulHookConsumerWidget {
+  const CriptoBalance({super.key});
 
   @override
-  ConsumerState<AllBalance> createState() => _AllBalanceState();
+  ConsumerState<CriptoBalance> createState() => _CriptoBalanceState();
 }
 
-class _AllBalanceState extends ConsumerState<AllBalance> {
+class _CriptoBalanceState extends ConsumerState<CriptoBalance> {
   @override
   Widget build(BuildContext context) {
-    var stateVisible = ref.watch(visibilityProvider.state);
-    var criptoModelApi;
+    final ballance = ref.watch(amountProvider.state).state;
+    final stateVisible = ref.watch(visibilityProvider.state);
 
     return Padding(
       padding: const EdgeInsets.all(18),
@@ -47,7 +41,7 @@ class _AllBalanceState extends ConsumerState<AllBalance> {
           ),
           stateVisible.state
               ? Text(
-                  FormatCurrency.doubleFormat(criptoModelApi.currentPrice),
+                  FormatCurrency.format(ballance),
                   style: GoogleFonts.montserrat(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,

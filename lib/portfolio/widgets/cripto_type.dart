@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/shared/use_cases/model/cripto_model_api.dart';
+import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
 
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 
 class CriptoType extends HookConsumerWidget {
-  final CriptoModelApi criptoModelApi;
+  final CriptosViewData criptosViewData;
 
-  CriptoType({required this.criptoModelApi, Key? key}) : super(key: key);
+  const CriptoType({required this.criptosViewData, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final visible = ref.watch(visibilityProvider.state);
+    final stateVisible = ref.watch(visibilityProvider.state);
 
     return Column(
       children: [
@@ -27,7 +27,7 @@ class CriptoType extends HookConsumerWidget {
                 children: [
                   CircleAvatar(
                     radius: 26,
-                    backgroundImage: NetworkImage(criptoModelApi.image),
+                    backgroundImage: NetworkImage(criptosViewData.image),
                     backgroundColor: Colors.transparent,
                   ),
                   const SizedBox(width: 10),
@@ -35,7 +35,7 @@ class CriptoType extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        criptoModelApi.symbol.toUpperCase(),
+                        criptosViewData.symbol.toUpperCase(),
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 19,
@@ -43,7 +43,7 @@ class CriptoType extends HookConsumerWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        criptoModelApi.name,
+                        criptosViewData.name,
                         style: const TextStyle(
                           color: Color.fromRGBO(117, 118, 128, 1),
                           fontSize: 15,
@@ -55,20 +55,20 @@ class CriptoType extends HookConsumerWidget {
               ),
               Row(
                 children: [
-                  visible.state
+                  stateVisible.state
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              FormatCurrency.doubleFormat(
-                                  criptoModelApi.currentPrice),
+                              FormatCurrency.format(
+                                  criptosViewData.currentPrice),
                               style: const TextStyle(fontSize: 20),
                             ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
                                 Text(
-                                  criptoModelApi.symbol.toUpperCase(),
+                                  '${criptosViewData.currentPrice.toStringAsFixed(1).replaceAll(".", ",")} ${criptosViewData.symbol.toUpperCase()}',
                                   style: const TextStyle(
                                     color: Color.fromRGBO(117, 118, 128, 1),
                                     fontSize: 15,
@@ -104,7 +104,7 @@ class CriptoType extends HookConsumerWidget {
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: () {
                       Navigator.pushNamed(context, '/details',
-                          arguments: criptoModelApi);
+                          arguments: criptosViewData);
                     },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,

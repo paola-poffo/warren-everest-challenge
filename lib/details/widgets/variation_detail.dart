@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class VariationDetail extends StatelessWidget {
   final String title;
-  final dynamic number;
+  final String number;
   final Color? color;
 
   const VariationDetail({

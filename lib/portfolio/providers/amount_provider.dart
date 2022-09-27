@@ -1,3 +1,3 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var dayProvider = StateProvider((ref) => 1);
+var amountProvider = StateProvider((ref) => 0.0);

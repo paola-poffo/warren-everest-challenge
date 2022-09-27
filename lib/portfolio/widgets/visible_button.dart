@@ -11,11 +11,10 @@ class VisibleButton extends StatefulHookConsumerWidget {
 }
 
 class _VisbleButtonState extends ConsumerState<VisibleButton> {
-
   @override
   Widget build(BuildContext context) {
     var stateVisible = ref.watch(visibilityProvider.state);
-    
+
     return IconButton(
       onPressed: () {
         setState(
