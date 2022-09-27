@@ -26,7 +26,7 @@ class Routes {
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
           return DetailsScreen(
-            criptoViewData: argument,
+            criptosViewData: argument,
           );
         },
       );

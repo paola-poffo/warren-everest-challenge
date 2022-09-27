@@ -7,9 +7,9 @@ import 'button_day.dart';
 import 'variation_detail.dart';
 import '../providers/day_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
-import 'coin_ballance.dart';
+import 'header_balance.dart';
 import 'currency_converter_button.dart';
-import 'graphic.dart';
+import 'custom_linechart.dart';
 
 class BodyDetails extends HookConsumerWidget {
   final CriptosViewData criptosViewData;
@@ -20,19 +20,21 @@ class BodyDetails extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var days = ref.watch(dayProvider.state).state;
+    var days = ref.watch(dayProvider);
     final marketData = ref.watch(marketProvider(criptosViewData.id));
 
     return marketData.when(
       data: ((data) {
+        final changeVariation =
+            (data.prices.last.last / data.prices.reversed.elementAt(days).last - 1) * 100;
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
-                CoinBallance(criptosViewData: criptosViewData),
-                Graphic(
+                HeaderBalance(criptosViewData: criptosViewData),
+                CustomLineChart(
                   list: List<FlSpot>.from(
                     data.prices.reversed.map(
                       (cripto) => FlSpot(
@@ -81,17 +83,9 @@ class BodyDetails extends HookConsumerWidget {
                     const Divider(thickness: 1),
                     VariationDetail(
                         title: 'Variação em $days dias',
-                        color: (data.prices.last.last /
-                                            data.prices.reversed
-                                                .elementAt(days)
-                                                .last -
-                                        1) *
-                                    100 >
-                                0
-                            ? Colors.green
-                            : Colors.red,
+                        color: changeVariation > 0 ? Colors.green : Colors.red,
                         number:
-                            '${(data.prices.last.last / data.prices.reversed.elementAt(days).last - 1) * 100 > 0 ? '+' : ''} ${(data.prices.last.last / data.prices.reversed.elementAt(days).last - 1) * 100}%'),
+                            '${changeVariation > 0 ? '+' : ''} ${changeVariation.toString()}%'),
                     const Divider(thickness: 1),
                     VariationDetail(
                       title: 'Quantidade',

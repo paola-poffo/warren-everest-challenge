@@ -5,9 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/day_provider.dart';
 
-class Graphic extends HookConsumerWidget {
+class CustomLineChart extends HookConsumerWidget {
   final List<FlSpot> list;
-  const Graphic({
+  const CustomLineChart({
     Key? key,
     required this.list,
   }) : super(key: key);
@@ -65,7 +65,7 @@ class Graphic extends HookConsumerWidget {
                 color: const Color.fromRGBO(224, 43, 87, 1),
                 dotData: FlDotData(show: false),
                 isStrokeCapRound: true,
-                spots: list.sublist(0, ref.watch(dayProvider.state).state + 1),
+                spots: list.sublist(0, ref.watch(dayProvider)),
               ),
             ],
           ),

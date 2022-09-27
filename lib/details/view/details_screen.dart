@@ -5,15 +5,17 @@ import '../widgets/default_appbar_details.dart';
 import '../widgets/body_details.dart';
 
 class DetailsScreen extends HookConsumerWidget {
-  const DetailsScreen({Key? key, required CriptosViewData criptoViewData}) : super(key: key);
+  const DetailsScreen({
+    Key? key,
+    required this.criptosViewData,
+  }) : super(key: key);
+
+  final CriptosViewData criptosViewData;
 
   static const route = '/details';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final args = ModalRoute.of(context)!.settings.arguments as CriptosViewData;
-    CriptosViewData criptosViewData = args;
-
     return SafeArea(
       child: Scaffold(
         appBar: const DefaultAppbarDetails(),

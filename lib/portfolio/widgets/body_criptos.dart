@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../providers/criptos_usecase_provider.dart';
+import '../providers/cripto_provider.dart';
 import 'cripto_balance.dart';
 import 'cripto_list.dart';
 
