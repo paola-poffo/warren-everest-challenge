@@ -29,7 +29,7 @@ class CustomLineChart extends HookConsumerWidget {
                       color: const Color.fromRGBO(224, 43, 87, 1),
                       strokeWidth: 3,
                     ),
-                    FlDotData(show: false),
+                    FlDotData(show: true),
                   );
                 }).toList();
               },
