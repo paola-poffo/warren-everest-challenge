@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../shared/utils/arguments.dart';
-import '../../shared/use_cases/model/cripto_model.dart';
+import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
 
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 
 class CriptoType extends HookConsumerWidget {
-  final CriptoModel criptoModel;
+  final CriptosViewData criptosViewData;
 
-  const CriptoType({required this.criptoModel, Key? key}) : super(key: key);
-
-  double allPriceChange() {
-    return (criptoModel.allPrices.first.toDouble() /
-                criptoModel.allPrices[1].toDouble() -
-            1) *
-        100;
-  }
+  const CriptoType({required this.criptosViewData, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final visible = ref.watch(visibilityProvider.state);
+    final stateVisible = ref.watch(visibilityProvider.state);
 
     return Column(
       children: [
@@ -35,14 +27,15 @@ class CriptoType extends HookConsumerWidget {
                 children: [
                   CircleAvatar(
                     radius: 26,
-                    backgroundImage: AssetImage(criptoModel.image),
+                    backgroundImage: NetworkImage(criptosViewData.image),
+                    backgroundColor: Colors.transparent,
                   ),
                   const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        criptoModel.abbreviation,
+                        criptosViewData.symbol.toUpperCase(),
                         style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 19,
@@ -50,7 +43,7 @@ class CriptoType extends HookConsumerWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        criptoModel.name,
+                        criptosViewData.name,
                         style: const TextStyle(
                           color: Color.fromRGBO(117, 118, 128, 1),
                           fontSize: 15,
@@ -62,27 +55,20 @@ class CriptoType extends HookConsumerWidget {
               ),
               Row(
                 children: [
-                  visible.state
+                  stateVisible.state
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              FormatCurrency.format(criptoModel.amount),
+                              FormatCurrency.format(
+                                  criptosViewData.currentPrice),
                               style: const TextStyle(fontSize: 20),
                             ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
                                 Text(
-                                  criptoModel.done.toString(),
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(117, 118, 128, 1),
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  criptoModel.abbreviation,
+                                  '${criptosViewData.currentPrice.toStringAsFixed(1).replaceAll(".", ",")} ${criptosViewData.symbol.toUpperCase()}',
                                   style: const TextStyle(
                                     color: Color.fromRGBO(117, 118, 128, 1),
                                     fontSize: 15,
@@ -117,9 +103,8 @@ class CriptoType extends HookConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: () {
-                      criptoModel.variation = allPriceChange();
                       Navigator.pushNamed(context, '/details',
-                          arguments: Arguments(criptoModel: criptoModel));
+                          arguments: criptosViewData);
                     },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,

@@ -1,88 +1,123 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'variation_detail.dart';
-import '../../shared/provider/day_provider.dart';
-import '../../shared/utils/currency_formatter.dart';
-import '../../shared/provider/cripto_provider.dart';
+import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
+import '../providers/cripto_market_provider.dart';
 import 'button_day.dart';
-import 'coin_ballance.dart';
+import 'variation_detail.dart';
+import '../providers/day_provider.dart';
+import '../../shared/utils/currency_formatter.dart';
+import 'header_balance.dart';
 import 'currency_converter_button.dart';
-import 'graphic.dart';
+import 'custom_linechart.dart';
 
 class BodyDetails extends HookConsumerWidget {
-  const BodyDetails({Key? key}) : super(key: key);
+  final CriptosViewData criptosViewData;
+  const BodyDetails({
+    Key? key,
+    required this.criptosViewData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final criptoModel = ref.watch(criptoProvider.notifier).state;
-    final days = ref.watch(dayProvider);
+    var days = ref.watch(dayProvider);
+    final marketData = ref.watch(marketProvider(criptosViewData.id));
 
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            const CoinBallance(),
-            const Graphic(),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Row(
-                children: const [
-                  ButtonDay(
-                    title: '5D',
-                    daysButton: 5,
-                  ),
-                  ButtonDay(
-                    title: '15D',
-                    daysButton: 15,
-                  ),
-                  ButtonDay(
-                    title: '30D',
-                    daysButton: 30,
-                  ),
-                  ButtonDay(
-                    title: '45D',
-                    daysButton: 45,
-                  ),
-                  ButtonDay(
-                    title: '90D',
-                    daysButton: 90,
-                  ),
-                ],
-              ),
-            ),
-            Column(
+    return marketData.when(
+      data: ((data) {
+        final changeVariation =
+            (data.prices.last.last / data.prices.reversed.elementAt(days).last - 1) * 100;
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
               children: [
-                const Divider(thickness: 2),
-                VariationDetail(
-                  title: 'Preço atual',
-                  number: FormatCurrency.format(criptoModel.currentPrice),
+                HeaderBalance(criptosViewData: criptosViewData),
+                CustomLineChart(
+                  list: List<FlSpot>.from(
+                    data.prices.reversed.map(
+                      (cripto) => FlSpot(
+                        cripto[0].toDouble(),
+                        cripto[1].toDouble(),
+                      ),
+                    ),
+                  ),
                 ),
-                const Divider(thickness: 1),
-                VariationDetail(
-                  title: 'Variação',
-                  number:
-                      '${criptoModel.variation > 0 ? '+' : ''}${criptoModel.variation.toStringAsFixed(2)}%',
-                  color: criptoModel.variation > 0 ? Colors.green : Colors.red,
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: const [
+                      ButtonDay(
+                        title: '5D',
+                        daysButton: 5,
+                      ),
+                      ButtonDay(
+                        title: '15D',
+                        daysButton: 15,
+                      ),
+                      ButtonDay(
+                        title: '30D',
+                        daysButton: 30,
+                      ),
+                      ButtonDay(
+                        title: '45D',
+                        daysButton: 45,
+                      ),
+                      ButtonDay(
+                        title: '90D',
+                        daysButton: 90,
+                      ),
+                    ],
+                  ),
                 ),
-                const Divider(thickness: 1),
-                VariationDetail(
-                  title: 'Quantidade',
-                  number: '${criptoModel.done} ${criptoModel.abbreviation}',
+                Column(
+                  children: [
+                    const Divider(thickness: 1),
+                    VariationDetail(
+                      title: 'Preço atual',
+                      number: FormatCurrency.format(
+                        criptosViewData.currentPrice,
+                      ),
+                    ),
+                    const Divider(thickness: 1),
+                    VariationDetail(
+                        title: 'Variação em $days dias',
+                        color: changeVariation > 0 ? Colors.green : Colors.red,
+                        number:
+                            '${changeVariation > 0 ? '+' : ''} ${changeVariation.toString()}%'),
+                    const Divider(thickness: 1),
+                    VariationDetail(
+                      title: 'Quantidade',
+                      number:
+                          '${criptosViewData.currentPrice.toStringAsFixed(1).replaceAll(".", ",")} ${criptosViewData.symbol.toUpperCase()}',
+                    ),
+                    const Divider(thickness: 1),
+                    VariationDetail(
+                      title: 'Valor',
+                      number:
+                          FormatCurrency.format(criptosViewData.currentPrice),
+                    ),
+                  ],
                 ),
-                const Divider(thickness: 1),
-                VariationDetail(
-                  title: 'Valor',
-                  number: FormatCurrency.format(criptoModel.amount),
-                ),
+                const SizedBox(height: 30),
+                const CurrencyConverterButton(),
               ],
             ),
-            const SizedBox(height: 30),
-            const CurrencyConverterButton(),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
+      error: (object, stackTracer) {
+        return const Center(
+          child: Text('Tente novamente em instantes'),
+        );
+      },
+      loading: () {
+        return const Center(
+          child:
+              CircularProgressIndicator(color: Color.fromRGBO(224, 43, 87, 1)),
+        );
+      },
     );
   }
 }

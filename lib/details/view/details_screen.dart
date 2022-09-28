@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
 import '../widgets/default_appbar_details.dart';
-
-import '../../shared/use_cases/model/cripto_model.dart';
-import '../../shared/utils/arguments.dart';
-import '../../shared/provider/cripto_provider.dart';
 import '../widgets/body_details.dart';
 
 class DetailsScreen extends HookConsumerWidget {
+  const DetailsScreen({
+    Key? key,
+    required this.criptosViewData,
+  }) : super(key: key);
+
+  final CriptosViewData criptosViewData;
+
   static const route = '/details';
 
-  const DetailsScreen({Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    final args = ModalRoute.of(context)!.settings.arguments as Arguments;
-    CriptoModel cripto = args.criptoModel;
-    ref.read(criptoProvider.notifier).state = cripto;
-    ref.read(currentPriceProvider.notifier).state = cripto.currentPrice;
-    return const SafeArea(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SafeArea(
       child: Scaffold(
-        appBar: DefaultAppbarDetails(),
-        body: BodyDetails(),
+        appBar: const DefaultAppbarDetails(),
+        body: BodyDetails(criptosViewData: criptosViewData),
       ),
     );
   }

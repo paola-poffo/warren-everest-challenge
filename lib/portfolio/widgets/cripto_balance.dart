@@ -1,40 +1,27 @@
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../shared/provider/cripto_list_provider.dart';
-import '../../shared/use_cases/model/cripto_model.dart';
+import '../providers/amount_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
 import 'visible_button.dart';
 
-class AllBalance extends StatefulHookConsumerWidget {
-  const AllBalance({super.key});
+class CriptoBalance extends StatefulHookConsumerWidget {
+  const CriptoBalance({super.key});
 
   @override
-  ConsumerState<AllBalance> createState() => _AllBalanceState();
+  ConsumerState<CriptoBalance> createState() => _CriptoBalanceState();
 }
 
-late CriptoModel criptoModel;
-
-class _AllBalanceState extends ConsumerState<AllBalance> {
+class _CriptoBalanceState extends ConsumerState<CriptoBalance> {
   @override
   Widget build(BuildContext context) {
-    var criptosList = ref.read(criptoListProvider);
-    var stateVisible = ref.watch(visibilityProvider.state);
+    final balance = ref.watch(amountProvider.state).state;
+    final stateVisible = ref.watch(visibilityProvider.state);
 
-    Decimal ballance() {
-      Decimal balance = Decimal.parse('0');
-      for (int index = 0; index < criptosList.length; index++) {
-        balance += criptosList[index].amount;
-      }
-      return balance;
-    }
-
-    return Container(
-      margin: const EdgeInsets.only(right: 10, left: 20),
-      padding: const EdgeInsets.only(top: 10, bottom: 20),
+    return Padding(
+      padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,7 +41,7 @@ class _AllBalanceState extends ConsumerState<AllBalance> {
           ),
           stateVisible.state
               ? Text(
-                  FormatCurrency.format(ballance()),
+                  FormatCurrency.format(balance),
                   style: GoogleFonts.montserrat(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,

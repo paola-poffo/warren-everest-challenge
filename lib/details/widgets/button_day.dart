@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../shared/provider/day_provider.dart';
-import '../../shared/provider/cripto_provider.dart';
+import '../providers/day_provider.dart';
 
 class ButtonDay extends StatefulHookConsumerWidget {
   final int daysButton;
   final String title;
-  const ButtonDay({Key? key, required this.daysButton, required this.title})
-      : super(key: key);
+  const ButtonDay({
+    Key? key,
+    required this.daysButton,
+    required this.title,
+  }) : super(key: key);
 
   @override
   ConsumerState<ButtonDay> createState() => _ButtonDayState();
@@ -18,7 +20,6 @@ class _ButtonDayState extends ConsumerState<ButtonDay> {
   @override
   Widget build(BuildContext context) {
     var days = ref.watch(dayProvider.state);
-    var oneCripto = ref.watch(criptoProvider.notifier).state;
 
     Color getButtonColor() {
       if (widget.daysButton == days.state) {
@@ -34,10 +35,6 @@ class _ButtonDayState extends ConsumerState<ButtonDay> {
           () {
             days.state = widget.daysButton;
             getButtonColor();
-            ref.read(criptoProvider.notifier).getchangeVariation(widget.daysButton);
-            ref.read(currentPriceProvider.notifier).getCurrentPrice(widget.daysButton, oneCripto);
-            oneCripto.currentPrice = ref.read(currentPriceProvider.notifier).state;
-            oneCripto.variation = ref.read(criptoProvider.notifier).state.variation;
           },
         );
       },

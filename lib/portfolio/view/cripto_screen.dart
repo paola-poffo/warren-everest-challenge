@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../shared/widgets/bottom_navigation.dart';
-import '../widgets/all_balance.dart';
-import '../widgets/cripto_list.dart';
+import '../widgets/body_criptos.dart';
 
-class CriptoScreen extends StatefulHookConsumerWidget {
+class CriptoScreen extends StatelessWidget {
   const CriptoScreen({Key? key}) : super(key: key);
 
   static const route = '/cripto';
 
   @override
-  ConsumerState<CriptoScreen> createState() => _CriptoScreenState();
-}
-
-class _CriptoScreenState extends ConsumerState<CriptoScreen> {
-  @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-          body: Column(
-            children: const [
-              AllBalance(),
-              CriptoList(),
-            ],
-          ),
-          bottomNavigationBar: const BottomNavigation(index: 0)),
+        body: BodyCriptos(),
+        bottomNavigationBar: BottomNavigation(index: 0),
+      ),
     );
   }
 }

@@ -2,12 +2,7 @@ import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 
 class FormatCurrency {
-  static String format(Decimal price) {
-    return NumberFormat.simpleCurrency(locale: 'pt-BR')
-        .format(price.toDouble());
-  }
-
-  static String doubleFormat(double price) {
+  static String format(double price) {
     return NumberFormat.simpleCurrency(locale: 'pt-BR').format(price);
   }
 }
