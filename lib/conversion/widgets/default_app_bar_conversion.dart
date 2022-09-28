@@ -6,13 +6,13 @@ class DefaultAppbarConversion extends StatefulHookConsumerWidget
   const DefaultAppbarConversion( {Key? key}) : super(key: key);
 
   @override
-  ConsumerState<DefaultAppbarConversion> createState() => _DefaultAppbarState();
+  ConsumerState<DefaultAppbarConversion> createState() => _DefaultAppbarConversionState();
 
   @override
-  Size get preferredSize => const Size(double.maxFinite, 80);
+  Size get preferredSize => const Size(double.maxFinite, 50);
 }
 
-class _DefaultAppbarState extends ConsumerState<DefaultAppbarConversion> {
+class _DefaultAppbarConversionState extends ConsumerState<DefaultAppbarConversion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _DefaultAppbarState extends ConsumerState<DefaultAppbarConversion> {
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 1,
         title: const Text(
-          'Detalhes',
+          'Converter',
           style: TextStyle(
             fontSize: 21,
             color: Colors.black,

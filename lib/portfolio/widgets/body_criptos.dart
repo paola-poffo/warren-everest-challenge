@@ -17,9 +17,7 @@ class BodyCriptos extends HookConsumerWidget {
         return Column(
           children: [
             const CriptoBalance(),
-            CriptoList(
-              criptosViewData: criptoViewData,
-            ),
+            CriptoList(criptosViewData: criptoViewData),
           ],
         );
       },

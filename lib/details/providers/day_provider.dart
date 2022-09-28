@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var dayProvider = StateProvider((ref) => 15);
+var dayProvider = StateProvider((ref) => 5);
 
   

@@ -12,11 +12,12 @@ import 'currency_converter_button.dart';
 import 'custom_linechart.dart';
 
 class BodyDetails extends HookConsumerWidget {
-  final CriptosViewData criptosViewData;
   const BodyDetails({
     Key? key,
     required this.criptosViewData,
   }) : super(key: key);
+
+  final CriptosViewData criptosViewData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +27,9 @@ class BodyDetails extends HookConsumerWidget {
     return marketData.when(
       data: ((data) {
         final changeVariation =
-            (data.prices.last.last / data.prices.reversed.elementAt(days).last - 1) * 100;
+            (data.prices.last.last / data.prices.reversed.elementAt(days).last -
+                    1) *
+                100;
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -85,7 +88,7 @@ class BodyDetails extends HookConsumerWidget {
                         title: 'Variação em $days dias',
                         color: changeVariation > 0 ? Colors.green : Colors.red,
                         number:
-                            '${changeVariation > 0 ? '+' : ''} ${changeVariation.toString()}%'),
+                            '${changeVariation > 0 ? '+' : ''} ${changeVariation.toStringAsFixed(2)}%'),
                     const Divider(thickness: 1),
                     VariationDetail(
                       title: 'Quantidade',

@@ -1,4 +1,3 @@
-
 import '../../shared/api/models/all_criptos_response.dart';
 import '../model/criptos_view_data.dart';
 
