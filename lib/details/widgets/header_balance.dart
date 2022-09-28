@@ -6,7 +6,7 @@ import '../../portfolio/model/criptos_view_data.dart';
 import '../../shared/utils/currency_formatter.dart';
 
 class HeaderBalance extends HookConsumerWidget {
-  final CriptosViewData criptosViewData;
+  final CriptoViewData criptosViewData;
   const HeaderBalance({
     Key? key,
     required this.criptosViewData,

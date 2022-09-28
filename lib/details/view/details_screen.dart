@@ -6,7 +6,7 @@ import '../widgets/body_details.dart';
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key, required this.criptosViewData}) : super(key: key);
 
-  final CriptosViewData criptosViewData;
+  final CriptoViewData criptosViewData;
 
   static const route = '/details';
 

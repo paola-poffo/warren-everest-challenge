@@ -10,7 +10,7 @@ class BodyConversion extends StatelessWidget {
     required this.convertController,
   }) : super(key: key);
 
-  final CriptosViewData criptosViewData;
+  final CriptoViewData criptosViewData;
   final TextEditingController convertController;
 
   @override

@@ -2,10 +2,10 @@ import '../../shared/api/models/all_criptos_response.dart';
 import '../model/criptos_view_data.dart';
 
 extension CriptosMapper on AllCriptosResponse {
-  List<CriptosViewData> toViewData() {
+  List<CriptoViewData> toViewData() {
     return results
         .map(
-          (result) => CriptosViewData(
+          (result) => CriptoViewData(
             id: result.id,
             symbol: result.symbol,
             name: result.name,

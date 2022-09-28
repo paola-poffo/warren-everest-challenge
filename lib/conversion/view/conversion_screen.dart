@@ -7,7 +7,7 @@ import '../widgets/default_app_bar_conversion.dart';
 class ConversionScreen extends StatelessWidget {
   ConversionScreen({Key? key, required this.criptosViewData}) : super(key: key);
 
-  final CriptosViewData criptosViewData;
+  final CriptoViewData criptosViewData;
 
   static const route = '/conversion';
 

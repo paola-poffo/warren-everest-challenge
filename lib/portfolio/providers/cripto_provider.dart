@@ -4,7 +4,7 @@ import '../model/criptos_view_data.dart';
 import '../usecase/criptos_usecase_provider.dart';
 
 
-final criptosProvider = FutureProvider<List<CriptosViewData>>(
+final criptosProvider = FutureProvider<List<CriptoViewData>>(
   (ref) {
     return ref.read(criptosUsecaseProvider).execute();
   },

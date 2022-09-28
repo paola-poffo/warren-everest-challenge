@@ -17,7 +17,7 @@ class CriptoBalance extends StatefulHookConsumerWidget {
 class _CriptoBalanceState extends ConsumerState<CriptoBalance> {
   @override
   Widget build(BuildContext context) {
-    final balance = ref.watch(amountProvider.state).state;
+    final balance = ref.watch(amountProvider.state);
     final stateVisible = ref.watch(visibilityProvider.state);
 
     return Padding(
@@ -41,7 +41,7 @@ class _CriptoBalanceState extends ConsumerState<CriptoBalance> {
           ),
           stateVisible.state
               ? Text(
-                  FormatCurrency.format(balance),
+                  FormatCurrency.format(balance.state),
                   style: GoogleFonts.montserrat(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,

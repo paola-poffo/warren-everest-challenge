@@ -2,13 +2,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
-import '../providers/cripto_market_provider.dart';
+import '../usecase/cripto_market_provider.dart';
 import 'button_day.dart';
 import 'variation_detail.dart';
 import '../providers/day_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
 import 'header_balance.dart';
-import 'currency_converter_button.dart';
 import 'custom_linechart.dart';
 
 class BodyDetails extends HookConsumerWidget {
@@ -17,7 +16,7 @@ class BodyDetails extends HookConsumerWidget {
     required this.criptosViewData,
   }) : super(key: key);
 
-  final CriptosViewData criptosViewData;
+  final CriptoViewData criptosViewData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -104,7 +103,7 @@ class BodyDetails extends HookConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 30),
-                const CurrencyConverterButton(),
+                // const CurrencyConverterButton(criptosViewData: null,),
               ],
             ),
           ),
