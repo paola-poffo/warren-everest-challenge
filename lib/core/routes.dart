@@ -27,7 +27,7 @@ class Routes {
         pageBuilder: (context, animation, secondaryAnimation) {
           return DetailsScreen(
             criptosViewData: argument.criptosViewData,
-            //singleBalance: argument.singleBalance,
+            criptoConversion: argument.criptoConversion,
           );
         },
       );
@@ -38,7 +38,6 @@ class Routes {
         pageBuilder: (context, animation, secondaryAnimation) {
           return ConversionScreen(
             criptosViewData: argument.criptosViewData,
-            //singleBalance: argument.singleBalance,
           );
         },
       );

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/amount_provider.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/visibility_provider.dart';
-import 'visible_button.dart';
+import 'cripto_visible_button.dart';
 
 class CriptoBalance extends StatefulHookConsumerWidget {
   const CriptoBalance({super.key});
@@ -36,7 +36,7 @@ class _CriptoBalanceState extends ConsumerState<CriptoBalance> {
                   color: const Color.fromRGBO(224, 43, 87, 1),
                 ),
               ),
-              const VisibleButton(),
+              const CriptoVisibleButton(),
             ],
           ),
           stateVisible.state

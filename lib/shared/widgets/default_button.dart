@@ -17,21 +17,18 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: MaterialButton(
-        padding: const EdgeInsets.only(left: 115, right: 115),
         height: 60,
+        padding: const EdgeInsets.only(left: 115, right: 115),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: const Color.fromRGBO(224, 43, 87, 1),
         onPressed: () {
           Navigator.pushNamed(context, route, arguments: argument);
         },
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-            ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 17,
           ),
         ),
       ),

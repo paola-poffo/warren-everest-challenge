@@ -5,9 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../shared/utils/currency_formatter.dart';
 import '../providers/day_provider.dart';
 
-class CustomLineChart extends HookConsumerWidget {
+class DetailsCustomLineChart extends HookConsumerWidget {
   final List<FlSpot> list;
-  const CustomLineChart({
+  const DetailsCustomLineChart({
     Key? key,
     required this.list,
   }) : super(key: key);

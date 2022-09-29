@@ -1,11 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import '../../portfolio/model/criptos_view_data.dart';
-import '../../shared/utils/arguments.dart';
 import '../widgets/body_conversion.dart';
 import '../widgets/default_app_bar_conversion.dart';
 
 class ConversionScreen extends StatelessWidget {
-  ConversionScreen({Key? key, required this.criptosViewData}) : super(key: key);
+  ConversionScreen({
+    Key? key,
+    required this.criptosViewData,
+  }) : super(key: key);
 
   final CriptoViewData criptosViewData;
 

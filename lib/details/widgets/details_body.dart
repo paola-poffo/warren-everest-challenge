@@ -1,22 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
-import '../usecase/cripto_market_provider.dart';
-import 'button_day.dart';
-import 'variation_detail.dart';
-import '../providers/day_provider.dart';
-import '../../shared/utils/currency_formatter.dart';
-import 'header_balance.dart';
-import 'custom_linechart.dart';
 
-class BodyDetails extends HookConsumerWidget {
-  const BodyDetails({
+import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
+import 'package:warren_everest_challenge/shared/widgets/default_button.dart';
+
+import '../../shared/utils/arguments.dart';
+import '../../shared/utils/currency_formatter.dart';
+import '../providers/day_provider.dart';
+import '../usecase/cripto_market_provider.dart';
+import 'details_button_day.dart';
+import 'details_custom_linechart.dart';
+import 'details_header_balance.dart';
+import 'details_variation.dart';
+
+class DetailsBody extends HookConsumerWidget {
+  const DetailsBody({
     Key? key,
     required this.criptosViewData,
+    required this.criptoConversion,
   }) : super(key: key);
 
   final CriptoViewData criptosViewData;
+  final double criptoConversion;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +32,9 @@ class BodyDetails extends HookConsumerWidget {
 
     return marketData.when(
       data: ((data) {
+        Future.delayed(Duration.zero, () {
+          ref.read(dayProvider.state).state = 5;
+        });
         final changeVariation =
             (data.prices.last.last / data.prices.reversed.elementAt(days).last -
                     1) *
@@ -35,8 +45,8 @@ class BodyDetails extends HookConsumerWidget {
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
-                HeaderBalance(criptosViewData: criptosViewData),
-                CustomLineChart(
+                DetailsHeaderBalance(criptosViewData: criptosViewData),
+                DetailsCustomLineChart(
                   list: List<FlSpot>.from(
                     data.prices.reversed.map(
                       (cripto) => FlSpot(
@@ -50,23 +60,23 @@ class BodyDetails extends HookConsumerWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: Row(
                     children: const [
-                      ButtonDay(
+                      DetailsButtonDay(
                         title: '5D',
                         daysButton: 5,
                       ),
-                      ButtonDay(
+                      DetailsButtonDay(
                         title: '15D',
                         daysButton: 15,
                       ),
-                      ButtonDay(
+                      DetailsButtonDay(
                         title: '30D',
                         daysButton: 30,
                       ),
-                      ButtonDay(
+                      DetailsButtonDay(
                         title: '45D',
                         daysButton: 45,
                       ),
-                      ButtonDay(
+                      DetailsButtonDay(
                         title: '90D',
                         daysButton: 90,
                       ),
@@ -76,26 +86,26 @@ class BodyDetails extends HookConsumerWidget {
                 Column(
                   children: [
                     const Divider(thickness: 1),
-                    VariationDetail(
+                    DetailsVariation(
                       title: 'Preço atual',
                       number: FormatCurrency.format(
                         criptosViewData.currentPrice,
                       ),
                     ),
                     const Divider(thickness: 1),
-                    VariationDetail(
+                    DetailsVariation(
                         title: 'Variação em $days dias',
                         color: changeVariation > 0 ? Colors.green : Colors.red,
                         number:
                             '${changeVariation > 0 ? '+' : ''} ${changeVariation.toStringAsFixed(2)}%'),
                     const Divider(thickness: 1),
-                    VariationDetail(
+                    DetailsVariation(
                       title: 'Quantidade',
                       number:
-                          '${criptosViewData.currentPrice.toStringAsFixed(1).replaceAll(".", ",")} ${criptosViewData.symbol.toUpperCase()}',
+                          '${criptoConversion.toStringAsFixed(2)} ${criptosViewData.symbol.toUpperCase()}',
                     ),
                     const Divider(thickness: 1),
-                    VariationDetail(
+                    DetailsVariation(
                       title: 'Valor',
                       number:
                           FormatCurrency.format(criptosViewData.currentPrice),
@@ -103,7 +113,12 @@ class BodyDetails extends HookConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 30),
-                // const CurrencyConverterButton(criptosViewData: null,),
+                DefaultButton(
+                  argument: Argument(
+                      criptosViewData: criptosViewData, criptoConversion: criptoConversion),
+                  label: 'Converter moeda',
+                  route: '/conversion',
+                ),
               ],
             ),
           ),

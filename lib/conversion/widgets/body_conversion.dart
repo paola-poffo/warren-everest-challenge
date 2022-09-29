@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../portfolio/model/criptos_view_data.dart';
@@ -11,6 +12,7 @@ class BodyConversion extends StatelessWidget {
   }) : super(key: key);
 
   final CriptoViewData criptosViewData;
+
   final TextEditingController convertController;
 
   @override
