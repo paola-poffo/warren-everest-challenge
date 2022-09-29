@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:warren_everest_challenge/portfolio/model/criptos_view_data.dart';
 
 import '../widgets/details_body.dart';
-import '../widgets/default_appbar_details.dart';
+import '../widgets/details_default_appbar.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -22,7 +22,7 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const DefaultAppbarDetails(),
+        appBar: const DetailsDefaultAppbar(),
         body: DetailsBody(
           criptosViewData: criptosViewData,
           criptoConversion: criptoConversion,

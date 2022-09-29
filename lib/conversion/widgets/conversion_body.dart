@@ -2,17 +2,17 @@
 import 'package:flutter/material.dart';
 
 import '../../portfolio/model/criptos_view_data.dart';
-import '../../shared/utils/currency_formatter.dart';
 
-class BodyConversion extends StatelessWidget {
-  const BodyConversion({
+class ConversionBody extends StatelessWidget {
+  const ConversionBody({
     Key? key,
-    required this.criptosViewData,
+    required this.criptoViewData,
+    required this.criptoConversion,
     required this.convertController,
   }) : super(key: key);
 
-  final CriptoViewData criptosViewData;
-
+  final CriptoViewData criptoViewData;
+  final double criptoConversion;
   final TextEditingController convertController;
 
   @override
@@ -24,22 +24,24 @@ class BodyConversion extends StatelessWidget {
           Container(
             height: 56,
             padding: const EdgeInsets.symmetric(
-              horizontal: 20,
+              horizontal: 16,
             ),
             color: Colors.grey.shade200,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Saldo Disponível',
+                const Text(
+                  'Saldo disponível',
                   style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 16,
+                    color: Color.fromRGBO(117, 118, 128, 1),
+                    fontSize: 18,
                   ),
                 ),
                 Text(
-                  FormatCurrency.format(criptosViewData.currentPrice),
-                  style: const TextStyle(fontSize: 20),
+                  '${(criptoConversion).toStringAsFixed(8)} ${(criptoViewData.symbol).toUpperCase()}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
               ],
             ),
@@ -47,12 +49,12 @@ class BodyConversion extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(
               vertical: 20,
-              horizontal: 30,
+              horizontal: 16,
             ),
             child: Text(
               'Quanto você gostaria de converter?',
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -69,20 +71,20 @@ class BodyConversion extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 9,
+                      radius: 10,
                       backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(criptosViewData.image),
+                      backgroundImage: NetworkImage(criptoViewData.image),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 5,
+                        left: 10,
                       ),
-                      child: Text(criptosViewData.symbol.toUpperCase()),
+                      child: Text(criptoViewData.symbol.toUpperCase()),
                     ),
                     const Icon(
                       Icons.keyboard_arrow_down,
                       size: 20,
-                      color: Colors.grey,
+                      color: Color.fromRGBO(117, 118, 128, 1),
                     ),
                   ],
                 ),
@@ -90,32 +92,32 @@ class BodyConversion extends StatelessWidget {
               const Icon(
                 Icons.sync_alt,
                 color: Color.fromRGBO(224, 43, 87, 1),
-                size: 25,
+                size: 28,
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.grey.shade300),
+                  side: BorderSide(color: Colors.grey.shade200),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () {},
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 9,
+                      radius: 10,
                       backgroundColor: Colors.transparent,
                       backgroundImage:
-                          Image.network(criptosViewData.image).image,
+                          Image.network(criptoViewData.image).image,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 5,
+                        left: 10,
                       ),
-                      child: Text(criptosViewData.symbol.toUpperCase()),
+                      child: Text(criptoViewData.symbol.toUpperCase()),
                     ),
                     const Icon(
                       Icons.keyboard_arrow_down,
                       size: 20,
-                      color: Colors.grey,
+                      color: Color.fromRGBO(117, 118, 128, 1),
                     ),
                   ],
                 ),
@@ -124,14 +126,13 @@ class BodyConversion extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 20,
+              horizontal: 30,
               vertical: 10,
             ),
             child: TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: convertController,
               decoration: InputDecoration(
-                hintText: '${criptosViewData.symbol.toUpperCase()} 0,00',
+                hintText: '${criptoViewData.symbol.toUpperCase()} 0,00',
                 hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontSize: 25,
@@ -144,11 +145,11 @@ class BodyConversion extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
+              horizontal: 30,
+              vertical: 5,
             ),
             child: Text(
-              'R\$ 10000',
+              'R\$ 0,00',
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
@@ -160,36 +161,44 @@ class BodyConversion extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  width: double.maxFinite,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 30,
-                  ),
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(color: Colors.grey.shade300),
+                      top: BorderSide(color: Colors.grey.shade200),
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Total estimado',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Total estimado',
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            '${criptoConversion.toStringAsFixed(5)} ${criptoViewData.symbol.toUpperCase()}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        '0,0000 ${criptosViewData.symbol.toUpperCase()}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                      FloatingActionButton(
+                        backgroundColor: const Color.fromRGBO(224, 43, 87, 1),
+                        onPressed: () {},
+                        child: const Icon(
+                          Icons.arrow_forward,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

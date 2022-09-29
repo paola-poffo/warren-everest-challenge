@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warren_everest_challenge/portfolio/providers/cripto_conversion_provider.dart';
 
 import '../conversion/view/conversion_screen.dart';
 import '../details/view/details_screen.dart';
@@ -38,6 +39,7 @@ class Routes {
         pageBuilder: (context, animation, secondaryAnimation) {
           return ConversionScreen(
             criptosViewData: argument.criptosViewData,
+            criptoConversion: argument.criptoConversion,
           );
         },
       );

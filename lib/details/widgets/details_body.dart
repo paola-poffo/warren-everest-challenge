@@ -32,13 +32,8 @@ class DetailsBody extends HookConsumerWidget {
 
     return marketData.when(
       data: ((data) {
-        Future.delayed(Duration.zero, () {
-          ref.read(dayProvider.state).state = 5;
-        });
         final changeVariation =
-            (data.prices.last.last / data.prices.reversed.elementAt(days).last -
-                    1) *
-                100;
+            (data.prices.last.last / data.prices.reversed.elementAt(days).last - 1) * 100;
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -115,7 +110,9 @@ class DetailsBody extends HookConsumerWidget {
                 const SizedBox(height: 30),
                 DefaultButton(
                   argument: Argument(
-                      criptosViewData: criptosViewData, criptoConversion: criptoConversion),
+                    criptosViewData: criptosViewData,
+                    criptoConversion: criptoConversion,
+                  ),
                   label: 'Converter moeda',
                   route: '/conversion',
                 ),
