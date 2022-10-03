@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import '../../portfolio/model/criptos_view_data.dart';
 
 class ConversionBalanceAvailable extends StatelessWidget {
-  CriptoViewData criptoViewData;
-  double criptoConversion;
-  ConversionBalanceAvailable({
+  final CriptoViewData criptoViewData;
+  final double criptoConversion;
+  
+  const ConversionBalanceAvailable({
     Key? key,
     required this.criptoViewData,
     required this.criptoConversion,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../conversion/widgets/conversion_body.dart';
 import '../details/view/details_screen.dart';
 import '../portfolio/view/cripto_screen.dart';
+import '../revision/revision_screen.dart';
 import '../shared/utils/arguments.dart';
 import '../transactions/view/transactions_screen.dart';
 
@@ -37,6 +38,17 @@ class Routes {
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
           return ConversionBody(
+            criptoViewData: argument.criptoViewData,
+            criptoConversion: argument.criptoConversion,
+          );
+        },
+      );
+    } else if (settings.name == RevisionScreen.route) {
+      final argument = settings.arguments as Argument;
+      return PageRouteBuilder(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return RevisionScreen(
             criptoViewData: argument.criptoViewData,
             criptoConversion: argument.criptoConversion,
           );

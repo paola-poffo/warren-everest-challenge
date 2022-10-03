@@ -1,4 +1,4 @@
-import 'package:decimal/decimal.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../portfolio/model/criptos_view_data.dart';
 import '../../portfolio/providers/cripto_provider.dart';
@@ -14,8 +14,18 @@ final singleCriptoProvider = StateProvider<CriptoViewData>(
   ),
 );
 
-final convertedCriptoProvider = StateProvider<CriptoViewData>((ref) {
-  return ref.read(criptosProvider).value!.first;
-});
+final convertedCriptoProvider = StateProvider<CriptoViewData>(
+  (ref) {
+    return ref.read(criptosProvider).value!.first;
+  },
+);
+final textFieldCriptoProvider = StateProvider<TextEditingController>(
+  (ref) => TextEditingController(),
+);
 
-final conversionDoneProvider = StateProvider<bool>((ref) => true);
+final total = StateProvider<double>(
+  (ref) => 0,
+);
+final conversionDoneProvider = StateProvider<bool>(
+  (ref) => false,
+);
