@@ -1,212 +1,217 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../portfolio/model/criptos_view_data.dart';
+import '../../portfolio/providers/cripto_provider.dart';
+import '../../shared/utils/arguments.dart';
+import '../provider/single_cripto_provider.dart';
+import 'conversion_drop_down.dart';
+import 'conversion_balance_available.dart';
 
-class ConversionBody extends StatelessWidget {
+class ConversionBody extends StatefulHookConsumerWidget {
+  final CriptoViewData criptoViewData;
+  final double criptoConversion;
+
   const ConversionBody({
     Key? key,
     required this.criptoViewData,
     required this.criptoConversion,
-    required this.convertController,
   }) : super(key: key);
 
-  final CriptoViewData criptoViewData;
-  final double criptoConversion;
-  final TextEditingController convertController;
+  static const route = '/conversion';
+
+  @override
+  ConsumerState<ConversionBody> createState() => _ConversionBodyState();
+}
+
+class _ConversionBodyState extends ConsumerState<ConversionBody> {
+  TextEditingController convertController = TextEditingController();
+  final key = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      ref.watch(singleCriptoProvider.state).state = widget.criptoViewData;
+    });
+    convertController.addListener(getLastestValue);
+  }
+
+  String formattingValue(String value) {
+    return value.replaceAll(RegExp(r'[^\w\s]+'), '.');
+  }
+
+  String getLastestValue() {
+    String value = formattingValue(convertController.text);
+
+    return value;
+  }
+
+  double convertLatestValue() {
+    double value = 0.0;
+    if (getLastestValue() == '' || getLastestValue() == '.') {
+      value = 0.0;
+    } else {
+      value =
+          double.parse(getLastestValue()) * widget.criptoViewData.currentPrice;
+    }
+    return value;
+  }
+
+  String formatLatestValue() {
+    String value = NumberFormat.simpleCurrency(locale: 'pt-br')
+        .format(convertLatestValue());
+    return value;
+  }
+
+  String getTotal(CriptoViewData cripto) {
+    if (convertLatestValue() == 0.0) {
+      return '0.00 ${cripto.symbol.toUpperCase()}';
+    }
+    double total = convertLatestValue() / cripto.currentPrice;
+    return '${total.toStringAsFixed(10)} ${cripto.symbol.toUpperCase()}';
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 56,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            color: Colors.grey.shade200,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Saldo disponível',
-                  style: TextStyle(
-                    color: Color.fromRGBO(117, 118, 128, 1),
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  '${(criptoConversion).toStringAsFixed(8)} ${(criptoViewData.symbol).toUpperCase()}',
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 16,
-            ),
-            child: Text(
-              'Quanto você gostaria de converter?',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                onPressed: () {},
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 10,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(criptoViewData.image),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: Text(criptoViewData.symbol.toUpperCase()),
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      size: 20,
-                      color: Color.fromRGBO(117, 118, 128, 1),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(
-                Icons.sync_alt,
-                color: Color.fromRGBO(224, 43, 87, 1),
-                size: 28,
-              ),
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.grey.shade200),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                onPressed: () {},
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 10,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                          Image.network(criptoViewData.image).image,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: Text(criptoViewData.symbol.toUpperCase()),
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      size: 20,
-                      color: Color.fromRGBO(117, 118, 128, 1),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30,
-              vertical: 10,
-            ),
-            child: TextFormField(
-              controller: convertController,
-              decoration: InputDecoration(
-                hintText: '${criptoViewData.symbol.toUpperCase()} 0,00',
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 25,
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              // onChanged: () {},
-              // validator: () {},
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 30,
-              vertical: 5,
-            ),
-            child: Text(
-              'R\$ 0,00',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          Expanded(
+    final argument = ModalRoute.of(context)!.settings.arguments as Argument;
+    final criptoProvider = ref.watch(criptosProvider);
+    var singleCripto = ref.watch(singleCriptoProvider.state);
+    var convertedCripto = ref.watch(convertedCriptoProvider.state);
+
+    return criptoProvider.when(
+      data: (data) {
+        return Form(
+          key: key,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(color: Colors.grey.shade200),
+                ConversionBalanceAvailable(
+                  criptoViewData: argument.criptoViewData,
+                  criptoConversion: argument.criptoConversion,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 16,
+                  ),
+                  child: Text(
+                    'Quanto você gostaria de converter?',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Total estimado',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            '${criptoConversion.toStringAsFixed(5)} ${criptoViewData.symbol.toUpperCase()}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ConversionDropDown(
+                      criptoViewData: singleCripto.state,
+                      onChangedDropdown: (CriptoViewData? singlecriptos) {
+                        singleCripto.state = singlecriptos!;
+                        convertLatestValue();
+                      },
+                    ),
+                    const Icon(
+                      Icons.sync_alt,
+                      color: Color.fromRGBO(224, 43, 87, 1),
+                      size: 20,
+                    ),
+                    ConversionDropDown(
+                      criptoViewData: convertedCripto.state,
+                      onChangedDropdown: (CriptoViewData? convertedCriptos) {
+                        convertedCripto.state = convertedCriptos!;
+                        convertLatestValue();
+                      },
+                    ),
+                  ],
+                ),
+                TextFormField(
+                  controller: convertController,
+                  showCursor: false,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(224, 43, 87, 1),
+                        width: 3,
                       ),
-                      FloatingActionButton(
-                        backgroundColor: const Color.fromRGBO(224, 43, 87, 1),
-                        onPressed: () {},
-                        child: const Icon(
-                          Icons.arrow_forward,
-                        ),
+                    ),
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(224, 43, 87, 1),
+                        width: 3,
                       ),
-                    ],
+                    ),
+                    hintText:
+                        '${widget.criptoViewData.symbol.toUpperCase()} 0.00',
+                    hintStyle: TextStyle(
+                      fontSize: 30,
+                      color: Colors.grey.shade500,
+                    ),
                   ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'^(\d+)?\.?\d{0,6}')),
+                  ],
+                  onChanged: (value) {
+                    if (key.currentState!.validate()) {
+                      setState(() {
+                        formatLatestValue();
+                        getTotal(singleCripto.state);
+                      });
+                    }
+                  },
+                  validator: (value) {
+                    if (value == '' || value == null) {
+                    } else if (double.parse(formattingValue(value.toString())) >
+                        argument.criptoConversion) {
+                      return 'Saldo insuficiente';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  formatLatestValue(),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey.shade500,
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.32),
+                const Divider(thickness: 1),
+                Text(
+                  'Total estimado',
+                  style: TextStyle(color: Colors.grey.shade500, fontSize: 17),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  getTotal(convertedCripto.state),
+                  style: const TextStyle(
+                      fontSize: 23, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        );
+      },
+      error: (object, stackTracer) {
+        return const Center(
+          child: Text('Tente novamente em instantes'),
+        );
+      },
+      loading: () {
+        return const Center(
+          child:
+              CircularProgressIndicator(color: Color.fromRGBO(224, 43, 87, 1)),
+        );
+      },
     );
   }
 }

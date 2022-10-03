@@ -1,21 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../portfolio/model/criptos_view_data.dart';
 import '../widgets/conversion_body.dart';
 import '../widgets/conversion_default_app_bar.dart';
+import '../widgets/conversion_floating_action_button.dart';
 
 class ConversionScreen extends StatelessWidget {
-  ConversionScreen({
+  final CriptoViewData criptoViewData;
+  final double criptoConversion;
+
+  const ConversionScreen({
     Key? key,
-    required this.criptosViewData,
+    required this.criptoViewData,
     required this.criptoConversion,
   }) : super(key: key);
-
-  static const route = '/conversion';
-  final CriptoViewData criptosViewData;
-  final double criptoConversion;
-  final TextEditingController convertController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +21,12 @@ class ConversionScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const ConversionDefaultAppbar(),
         body: ConversionBody(
-          criptoViewData: criptosViewData,
-          convertController: convertController,
           criptoConversion: criptoConversion,
+          criptoViewData: criptoViewData,
+        ),
+        floatingActionButton: ConversionFloatingActionButton(
+          done: done,
+          argument: argument,
         ),
       ),
     );

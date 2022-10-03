@@ -110,7 +110,7 @@ class DetailsBody extends HookConsumerWidget {
                 const SizedBox(height: 30),
                 DefaultButton(
                   argument: Argument(
-                    criptosViewData: criptosViewData,
+                    criptoViewData: criptosViewData,
                     criptoConversion: criptoConversion,
                   ),
                   label: 'Converter moeda',

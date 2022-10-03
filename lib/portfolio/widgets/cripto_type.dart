@@ -111,8 +111,14 @@ class CriptoType extends HookConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/details',
-                          arguments: Argument(criptosViewData: criptoViewData, criptoConversion: criptoConversion),);
+                      Navigator.pushNamed(
+                        context,
+                        '/details',
+                        arguments: Argument(
+                          criptoViewData: criptoViewData,
+                          criptoConversion: criptoConversion,
+                        ),
+                      );
                     },
                     color: const Color.fromRGBO(117, 118, 128, 1),
                     iconSize: 18,

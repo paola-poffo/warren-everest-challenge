@@ -9,11 +9,11 @@ import '../widgets/details_default_appbar.dart';
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
     Key? key,
-    required this.criptosViewData,
+    required this.criptoViewData,
     required this.criptoConversion,
   }) : super(key: key);
 
-  final CriptoViewData criptosViewData;
+  final CriptoViewData criptoViewData;
   final double criptoConversion;
 
   static const route = '/details';
@@ -24,7 +24,7 @@ class DetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const DetailsDefaultAppbar(),
         body: DetailsBody(
-          criptosViewData: criptosViewData,
+          criptosViewData: criptoViewData,
           criptoConversion: criptoConversion,
         ),
       ),

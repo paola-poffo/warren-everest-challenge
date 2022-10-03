@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/arguments.dart';
 
+// ignore: must_be_immutable
 class DefaultButton extends StatelessWidget {
   Argument argument;
   String route;
