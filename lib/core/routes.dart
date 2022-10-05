@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:warren_everest_challenge/portfolio/providers/cripto_conversion_provider.dart';
 
 import '../conversion/view/conversion_screen.dart';
 import '../details/view/details_screen.dart';
 import '../portfolio/view/cripto_screen.dart';
+import '../revision/view/revision_screen.dart';
 import '../shared/utils/arguments.dart';
 import '../transactions/view/transactions_screen.dart';
 
@@ -27,7 +27,7 @@ class Routes {
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
           return DetailsScreen(
-            criptosViewData: argument.criptosViewData,
+            criptoViewData: argument.criptoViewData,
             criptoConversion: argument.criptoConversion,
           );
         },
@@ -38,9 +38,16 @@ class Routes {
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
           return ConversionScreen(
-            criptosViewData: argument.criptosViewData,
+            criptoViewData: argument.criptoViewData,
             criptoConversion: argument.criptoConversion,
           );
+        },
+      );
+    } else if (settings.name == RevisionScreen.route) {
+      return PageRouteBuilder(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return const RevisionScreen();
         },
       );
     }

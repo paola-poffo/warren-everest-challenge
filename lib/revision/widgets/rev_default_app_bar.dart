@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ConversionDefaultAppbar extends StatefulHookConsumerWidget
+class RevisionDefaultAppbar extends StatefulHookConsumerWidget
     implements PreferredSizeWidget {
-  const ConversionDefaultAppbar( {Key? key}) : super(key: key);
+  const RevisionDefaultAppbar( {Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConversionDefaultAppbar> createState() => _ConversionDefaultAppbarState();
+  ConsumerState<RevisionDefaultAppbar> createState() => _RevisionDefaultAppbarState();
 
   @override
   Size get preferredSize => const Size(double.maxFinite, 50);
 }
 
-class _ConversionDefaultAppbarState extends ConsumerState<ConversionDefaultAppbar> {
+class _RevisionDefaultAppbarState extends ConsumerState<RevisionDefaultAppbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _ConversionDefaultAppbarState extends ConsumerState<ConversionDefaultAppba
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 1,
         title: const Text(
-          'Converter',
+          'Revisar',
           style: TextStyle(
             fontSize: 21,
             color: Colors.black,
