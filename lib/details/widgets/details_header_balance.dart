@@ -5,9 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../portfolio/model/criptos_view_data.dart';
 import '../../shared/utils/currency_formatter.dart';
 
-class HeaderBalance extends HookConsumerWidget {
-  final CriptosViewData criptosViewData;
-  const HeaderBalance({
+class DetailsHeaderBalance extends HookConsumerWidget {
+  final CriptoViewData criptosViewData;
+  const DetailsHeaderBalance({
     Key? key,
     required this.criptosViewData,
   }) : super(key: key);

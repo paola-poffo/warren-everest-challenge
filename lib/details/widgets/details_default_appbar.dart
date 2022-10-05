@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class DefaultAppbarConversion extends StatefulHookConsumerWidget
+class DetailsDefaultAppbar extends StatefulHookConsumerWidget
     implements PreferredSizeWidget {
-  const DefaultAppbarConversion( {Key? key}) : super(key: key);
+  const DetailsDefaultAppbar( {Key? key}) : super(key: key);
 
   @override
-  ConsumerState<DefaultAppbarConversion> createState() => _DefaultAppbarState();
+  ConsumerState<DetailsDefaultAppbar> createState() => _DetailsDefaultAppbarState();
 
   @override
-  Size get preferredSize => const Size(double.maxFinite, 80);
+  Size get preferredSize => const Size(double.maxFinite, 50);
 }
 
-class _DefaultAppbarState extends ConsumerState<DefaultAppbarConversion> {
+class _DetailsDefaultAppbarState extends ConsumerState<DetailsDefaultAppbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

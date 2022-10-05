@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../conversion/view/conversion_screen.dart';
 import '../details/view/details_screen.dart';
-import '../portfolio/model/criptos_view_data.dart';
 import '../portfolio/view/cripto_screen.dart';
+import '../revision/view/revision_screen.dart';
+import '../shared/utils/arguments.dart';
 import '../transactions/view/transactions_screen.dart';
 
 class Routes {
@@ -21,20 +22,32 @@ class Routes {
         },
       );
     } else if (settings.name == DetailsScreen.route) {
-      final argument = settings.arguments as CriptosViewData;
+      final argument = settings.arguments as Argument;
       return PageRouteBuilder(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
           return DetailsScreen(
-            criptosViewData: argument,
+            criptoViewData: argument.criptoViewData,
+            criptoConversion: argument.criptoConversion,
           );
         },
       );
     } else if (settings.name == ConversionScreen.route) {
+      final argument = settings.arguments as Argument;
       return PageRouteBuilder(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
-          return const ConversionScreen();
+          return ConversionScreen(
+            criptoViewData: argument.criptoViewData,
+            criptoConversion: argument.criptoConversion,
+          );
+        },
+      );
+    } else if (settings.name == RevisionScreen.route) {
+      return PageRouteBuilder(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return const RevisionScreen();
         },
       );
     }

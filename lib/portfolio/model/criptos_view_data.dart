@@ -1,11 +1,11 @@
-class CriptosViewData {
+class CriptoViewData {
   final String id;
   final String symbol;
   final String name;
   final String image;
   final double currentPrice;
   final double percentage24h;
-  CriptosViewData({
+  CriptoViewData({
     required this.id,
     required this.symbol,
     required this.name,
