@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../shared/widgets/bottom_navigation.dart';
-import '../widgets/body_criptos.dart';
+import '../widgets/cripto_body.dart';
 
 class CriptoScreen extends StatelessWidget {
   const CriptoScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class CriptoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
-        body: BodyCriptos(),
+        body: CriptoBody(),
         bottomNavigationBar: BottomNavigation(index: 0),
       ),
     );

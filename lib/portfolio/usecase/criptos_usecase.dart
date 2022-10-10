@@ -6,7 +6,7 @@ class CriptosUsecase {
   final CriptosRepository repository;
   CriptosUsecase(this.repository);
 
-  Future<List<CriptosViewData>> execute() async {
+  Future<List<CriptoViewData>> execute() async {
     final response = await repository.getAllCriptos();
     return response.toViewData();
   }

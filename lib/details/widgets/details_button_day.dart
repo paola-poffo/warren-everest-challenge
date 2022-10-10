@@ -3,20 +3,20 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/day_provider.dart';
 
-class ButtonDay extends StatefulHookConsumerWidget {
+class DetailsButtonDay extends StatefulHookConsumerWidget {
   final int daysButton;
   final String title;
-  const ButtonDay({
+  const DetailsButtonDay({
     Key? key,
     required this.daysButton,
     required this.title,
   }) : super(key: key);
 
   @override
-  ConsumerState<ButtonDay> createState() => _ButtonDayState();
+  ConsumerState<DetailsButtonDay> createState() => _DetailsButtonDayState();
 }
 
-class _ButtonDayState extends ConsumerState<ButtonDay> {
+class _DetailsButtonDayState extends ConsumerState<DetailsButtonDay> {
   @override
   Widget build(BuildContext context) {
     var days = ref.watch(dayProvider.state);

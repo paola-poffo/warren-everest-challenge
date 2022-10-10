@@ -1,4 +1,4 @@
-import 'package:warren_everest_challenge/details/mapper/criptos_market_mapper.dart';
+import '../mapper/criptos_market_mapper.dart';
 
 import '../model/criptos_market_view_data.dart';
 import '../repository/market_repository.dart';

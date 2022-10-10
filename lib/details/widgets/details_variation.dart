@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class VariationDetail extends StatelessWidget {
+class DetailsVariation extends StatelessWidget {
   final String title;
   final String number;
   final Color? color;
 
-  const VariationDetail({
+  const DetailsVariation({
     Key? key,
     required this.title,
     required this.number,
