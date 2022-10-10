@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../conversion/view/conversion_screen.dart';
 import '../details/view/details_screen.dart';
 import '../portfolio/view/cripto_screen.dart';
+import '../revision/view/confirmed_screen.dart';
 import '../revision/view/revision_screen.dart';
 import '../shared/utils/arguments.dart';
 import '../transactions/view/transactions_screen.dart';
@@ -44,10 +45,24 @@ class Routes {
         },
       );
     } else if (settings.name == RevisionScreen.route) {
+      final argument = settings.arguments as RevisionArguments;
       return PageRouteBuilder(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) {
-          return const RevisionScreen();
+          return RevisionScreen(
+            convertQuantity: argument.convertQuantity,
+            receiveQuantity: argument.receiveQuantity,
+            criptoConversion: argument.criptoConversion,
+            criptoReceive: argument.criptoReceive,
+            total: argument.total,
+          );
+        },
+      );
+    } else if (settings.name == ConfirmedScreen.route) {
+      return PageRouteBuilder(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return const ConfirmedScreen();
         },
       );
     }

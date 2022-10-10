@@ -284,9 +284,14 @@ class _ConversionState extends ConsumerState<ConversionScreen> {
                               } else {
                                 Navigator.of(context).pushNamed(
                                   '/revision',
-                                  arguments: Argument(
-                                    criptoViewData: argument.criptoViewData,
-                                    criptoConversion: argument.criptoConversion,
+                                  arguments: RevisionArguments(
+                                    convertQuantity: convertController.text,
+                                    receiveQuantity: getTotal(
+                                      widget.criptoViewData,
+                                    ),
+                                    criptoReceive: widget.criptoViewData,
+                                    criptoConversion: widget.criptoViewData,
+                                    total: formatLatestValue(),
                                   ),
                                 );
                                 validate = true;

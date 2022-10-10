@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/rev_default_app_bar.dart';
+import '../../portfolio/model/criptos_view_data.dart';
+import '../widgets/revision_body.dart';
+import '../widgets/revision_default_app_bar.dart';
 
-class RevisionScreen extends StatefulWidget {
+class RevisionScreen extends StatelessWidget {
+  final String convertQuantity;
+  final String receiveQuantity;
+  final CriptoViewData criptoConversion;
+  final CriptoViewData criptoReceive;
+  final String total;
+
   const RevisionScreen({
     Key? key,
+    required this.convertQuantity,
+    required this.receiveQuantity,
+    required this.criptoConversion,
+    required this.criptoReceive,
+    required this.total,
+
   }) : super(key: key);
 
   static const route = '/revision';
 
   @override
-  State<RevisionScreen> createState() => _RevisionScreenState();
-}
-
-class _RevisionScreenState extends State<RevisionScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: RevisionDefaultAppbar(),
-      body: Center(
-        child: Text('Em breve'),
+    return Scaffold(
+      appBar: const RevisionDefaultAppbar(),
+      body: RevisionScreenBody(
+        convertQuantity: convertQuantity,
+        receiveQuantity: receiveQuantity,
+        criptoConversion: criptoConversion,
+        criptoReceive: criptoReceive,
       ),
     );
   }
