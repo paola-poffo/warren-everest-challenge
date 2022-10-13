@@ -10,6 +10,10 @@ class RevisionScreen extends StatelessWidget {
   final CriptoViewData criptoConversion;
   final CriptoViewData criptoReceive;
   final String total;
+  final double discount;
+  final double increase;
+  final String idDiscount;
+  final String idIncrease;
 
   const RevisionScreen({
     Key? key,
@@ -18,7 +22,10 @@ class RevisionScreen extends StatelessWidget {
     required this.criptoConversion,
     required this.criptoReceive,
     required this.total,
-
+    required this.discount,
+    required this.increase,
+    required this.idDiscount,
+    required this.idIncrease,
   }) : super(key: key);
 
   static const route = '/revision';
@@ -32,6 +39,11 @@ class RevisionScreen extends StatelessWidget {
         receiveQuantity: receiveQuantity,
         criptoConversion: criptoConversion,
         criptoReceive: criptoReceive,
+        total: total,
+        discount: discount,
+        increase: increase,
+        idDiscount: idDiscount,
+        idIncrease: idIncrease,
       ),
     );
   }

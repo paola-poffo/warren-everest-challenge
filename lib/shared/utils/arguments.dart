@@ -15,6 +15,10 @@ class RevisionArguments {
   CriptoViewData criptoConversion;
   CriptoViewData criptoReceive;
   String total;
+  double discount;
+  double increase;
+  String idDiscount;
+  String idIncrease;
 
   RevisionArguments({
     required this.convertQuantity,
@@ -22,5 +26,9 @@ class RevisionArguments {
     required this.criptoConversion,
     required this.criptoReceive,
     required this.total,
+    required this.discount,
+    required this.increase,
+    required this.idDiscount,
+    required this.idIncrease,
   });
 }

@@ -262,6 +262,10 @@ class _ConversionFormState extends ConsumerState<ConversionForm> {
                             criptoReceive: widget.criptoViewData,
                             criptoConversion: widget.criptoViewData,
                             total: formatLatestValue(),
+                            discount: double.parse(convertController.text),
+                            increase: convertLatestValue(),
+                            idDiscount: widget.criptoViewData.id,
+                            idIncrease: widget.criptoViewData.id,
                           ),
                         );
                         validate = true;

@@ -11,6 +11,11 @@ class RevisionScreenBody extends StatelessWidget {
   final String receiveQuantity;
   final CriptoViewData criptoConversion;
   final CriptoViewData criptoReceive;
+  final String total;
+  final double increase;
+  final double discount;
+  final String idDiscount;
+  final String idIncrease;
 
   const RevisionScreenBody({
     Key? key,
@@ -18,6 +23,11 @@ class RevisionScreenBody extends StatelessWidget {
     required this.receiveQuantity,
     required this.criptoConversion,
     required this.criptoReceive,
+    required this.total,
+    required this.increase,
+    required this.discount,
+    required this.idDiscount,
+    required this.idIncrease,
   }) : super(key: key);
 
   @override
@@ -44,7 +54,17 @@ class RevisionScreenBody extends StatelessWidget {
             criptoReceive: criptoReceive,
           ),
           const SizedBox(height: 20),
-          const RevisionButton(),
+          RevisionButton(
+            convertQuantity: convertQuantity,
+            receiveQuantity: receiveQuantity,
+            criptoConversion: criptoConversion,
+            criptoReceive: criptoReceive,
+            total: total,
+            discount: discount,
+            increase: increase,
+            idDiscount: idDiscount,
+            idIncrease: idIncrease,
+          ),
           const SizedBox(height: 20),
         ],
       ),

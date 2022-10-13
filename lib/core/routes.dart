@@ -55,6 +55,10 @@ class Routes {
             criptoConversion: argument.criptoConversion,
             criptoReceive: argument.criptoReceive,
             total: argument.total,
+            discount: argument.discount,
+            increase: argument.increase,
+            idDiscount: argument.idDiscount,
+            idIncrease: argument.idIncrease,
           );
         },
       );

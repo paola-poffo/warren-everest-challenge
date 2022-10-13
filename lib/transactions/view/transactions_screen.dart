@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../shared/widgets/bottom_navigation.dart';
+import '../widgets/transactions_body.dart';
 
 class TransactionsScreen extends StatefulHookConsumerWidget {
   const TransactionsScreen({Key? key}) : super(key: key);
@@ -15,13 +16,10 @@ class TransactionsScreen extends StatefulHookConsumerWidget {
 class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Movimentações'),
-        ),
-        body: const Text(''),
-        bottomNavigationBar: const BottomNavigation(index: 1),
+        body: TransactionsBody(),
+        bottomNavigationBar: BottomNavigation(index: 1),
       ),
     );
   }
